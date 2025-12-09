@@ -1,0 +1,179 @@
+<section class="w-full flex justify-center mt-16 px-6">
+
+  <!-- CONTENEDOR GENERAL -->
+  <div class="flex flex-col items-center justify-center w-full max-w-6xl">
+
+    <!-- HERO / CABECERA -->
+    <div class="text-center mb-16">
+
+      <h1 class="text-6xl font-extrabold tracking-wide text-cyan-900 font-serif">
+        D&S • DevStudio
+      </h1>
+
+      <p class="text-xl text-gray-600 font-light italic mt-3">
+        "Aprendiendo, creando y avanzando en el mundo tecnológico."
+      </p>
+
+      <p class="text-2xl text-gray-700 font-light mt-10 max-w-3xl mx-auto">
+        Somos Diana y Sebastián, estudiantes apasionados por la tecnología, el desarrollo
+        web y la innovación digital.
+      </p>
+
+      <p class="text-2xl text-gray-700 font-light mt-3 max-w-3xl mx-auto">
+        Este es un espacio en donde compartimos nuestros proyectos, habilidades
+        y crecimiento profesional.
+      </p>
+
+    </div>
+
+    <!-- GRID DE CARDS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+      <!-- CARD DIANA -->
+      <div class="card bg-white shadow-lg hover:shadow-2xl hover:-translate-y-2 
+                  duration-300 w-80 rounded-2xl border border-gray-200">
+
+        <figure class="p-4">
+          <img src="assets/DianaA.jpeg" class="h-56 w-full object-cover rounded-xl shadow-md" />
+        </figure>
+
+        <div class="card-body text-center">
+          <h2 class="text-2xl font-bold text-cyan-900">Diana Avila</h2>
+          <p class="font-medium text-gray-700">Desarrolladora Web</p>
+
+          <p class="text-gray-500 text-sm mt-2">
+            Estudiante de Computación – UPS
+          </p>
+
+          <div class="w-40 h-1 bg-cyan-900 mx-auto my-4 rounded-full"></div>
+
+          <!-- SKILLS -->
+          <div class="flex flex-wrap justify-center gap-2">
+            <span class="badge badge-outline border-cyan-900">Angular</span>
+            <span class="badge badge-outline border-cyan-900">JavaScript</span>
+            <span class="badge badge-outline border-cyan-900">HTML</span>
+            <span class="badge badge-outline border-cyan-900">CSS</span>
+            <span class="badge badge-outline border-cyan-900">GitHub</span>
+          </div>
+
+          <div class="mt-6">
+            <a routerLink="/diana" class="btn btn-primary w-full">Ver Perfil</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD SEBASTIÁN -->
+      <div class="card bg-white shadow-lg hover:shadow-2xl hover:-translate-y-2 
+                  duration-300 w-80 rounded-2xl border border-gray-200">
+
+        <figure class="p-4">
+          <img src="assets/sebascara.jpeg" class="h-56 w-full object-cover rounded-xl shadow-md" />
+        </figure>
+
+        <div class="card-body text-center">
+          <h2 class="text-2xl font-bold text-cyan-900">Sebastián Cabrera</h2>
+          <p class="font-medium text-gray-700">Desarrollador Web</p>
+
+          <p class="text-gray-500 text-sm mt-2">
+            Estudiante de Computación – UPS
+          </p>
+
+          <div class="w-40 h-1 bg-cyan-900 mx-auto my-4 rounded-full"></div>
+
+          <!-- SKILLS -->
+          <div class="flex flex-wrap justify-center gap-2">
+            <span class="badge badge-outline border-cyan-900">Angular</span>
+            <span class="badge badge-outline border-cyan-900">HTML</span>
+            <span class="badge badge-outline border-cyan-900">CSS</span>
+            <span class="badge badge-outline border-cyan-900">GitHub</span>
+            <span class="badge badge-outline border-cyan-900">Bases de Datos</span>
+          </div>
+
+          <div class="mt-6">
+            <a routerLink="/sebas" class="btn btn-primary w-full">Ver Perfil</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN PROYECTOS DESTACADOS       -->
+
+<section id= "proyectos" class="w-full py-24 bg-gray-100 mt-24">
+
+  <div class="max-w-6xl mx-auto px-8">
+
+    <!-- TÍTULO PRINCIPAL -->
+    <h2 class="text-5xl font-extrabold text-cyan-900 text-center mb-6 tracking-wide font-serif">
+      Nuestros Proyectos
+    </h2>
+
+    <p class="text-gray-600 text-lg text-center max-w-3xl mx-auto mb-16">
+      Una recopilación de trabajos realizados a lo largo de nuestro aprendizaje en desarrollo web,
+      aplicando diseño, usabilidad, programación y buenas prácticas modernas.
+    </p>
+
+    <!-- GRID DE PROYECTOS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+
+      <!-- CARD PROYECTO -->
+      <div class="bg-white p-7 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 
+                  hover:-translate-y-2 border border-gray-200 flex flex-col justify-between">
+
+        <div>
+          <h3 class="text-2xl font-bold text-center text-cyan-900 mb-3">Fundamentos</h3>
+          <p class="text-gray-600 text-center">
+            Proyecto basado en HTML y CSS enfocado en la construcción de interfaces
+            estáticas aplicando fundamentos esenciales del desarrollo web.
+          </p>
+        </div>
+
+        <a href="https://ccabreram1.github.io/icc-ppw-u2-01Fundamentos/" target="_blank"
+          class="btn btn-primary w-full mt-6">
+          Ver Proyecto
+        </a>
+      </div>
+
+      <!-- CARD PROYECTO -->
+      <div class="bg-white p-7 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 
+                  hover:-translate-y-2 border border-gray-200 flex flex-col justify-between">
+
+        <div>
+          <h3 class="text-2xl font-bold text-center text-cyan-900 mb-3">Heurísticas</h3>
+          <p class="text-gray-600 text-center">
+            Proyecto dedicado a la evaluación de interfaces utilizando heurísticas de usabilidad,
+            mejorando la experiencia del usuario de manera efectiva.
+          </p>
+        </div>
+
+        <a href="https://ccabreram1.github.io/icc-ppw-u2-02-ui-componentes/" target="_blank"
+          class="btn btn-primary w-full mt-6">
+          Ver Proyecto
+        </a>
+      </div>
+
+      <!-- CARD PROYECTO -->
+      <div class="bg-white p-7 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 
+                  hover:-translate-y-2 border border-gray-200 flex flex-col justify-between">
+
+        <div>
+          <h3 class="text-2xl font-bold text-center text-cyan-900 mb-3">Componentes & Estilos</h3>
+          <p class="text-gray-600 text-center">
+            Proyecto enfocado en diseño avanzado de componentes UI, aplicando estilos modernos
+            y principios de diseño limpios.
+          </p>
+        </div>
+
+        <a href="https://ccabreram1.github.io/icc-ppw-u3-03-ui-componentes-estilos/" target="_blank"
+          class="btn btn-primary w-full mt-6">
+          Ver Proyecto
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</section>

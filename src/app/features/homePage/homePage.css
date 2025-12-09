@@ -1,0 +1,45 @@
+/* Centrar contenido principal */
+.container-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Ajustes visuales para el título */
+.main-title {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Ajuste suave a las tarjetas (cards) */
+.card:hover {
+  transform: scale(1.02);
+  transition: 0.2s ease-in-out;
+}
+
+/* Borde redondeado extra a las imágenes */
+.card img {
+  border-radius: 8px 8px 0 0;
+}
+
+/* Sombra suave al pasar el mouse */
+.card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Espaciado general del homepage */
+.home-wrapper {
+  padding: 2rem;
+}
+
+/* Diseño responsivo para móviles */
+@media (max-width: 600px) {
+  .main-title {
+    font-size: 1.8rem;
+  }
+
+  .card img {
+    height: 200px;
+  }
+}
