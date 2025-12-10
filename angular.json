@@ -43,7 +43,9 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/icc-ppw-proyecto-portafolio/",
+              "deployUrl": "/icc-ppw-proyecto-portafolio/"
             },
             "development": {
               "optimization": false,

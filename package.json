@@ -41,6 +41,7 @@
     "@angular/build": "^21.0.1",
     "@angular/cli": "^21.0.1",
     "@angular/compiler-cli": "^21.0.0",
+    "angular-cli-ghpages": "2.0.3",
     "daisyui": "^5.5.8",
     "jsdom": "^27.1.0",
     "tailwindcss-animate": "^1.0.7",

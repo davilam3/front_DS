@@ -18,7 +18,7 @@ export const routes: Routes = [
         path: 'login',
         loadComponent: () =>
             import('./features/auth/pages/login-page/login-page').then(m => m.LoginPage),
-        canActivate: [publicGuard]
+        //canActivate: [publicGuard]
     },
 
     {
@@ -32,6 +32,11 @@ export const routes: Routes = [
         path: 'inicio',
         loadComponent: () =>
             import('./features/homePage/homePage').then(m => m.HomePage),
+    },
+    {
+        path: 'contacto',
+        loadComponent: ()  =>
+            import('./features/contacto/contacto').then(m => m.Contacto),
     },
 
     {

@@ -1,0 +1,226 @@
+<!-- ============================== -->
+<!-- SECCIÓN CABECERA-->
+<!-- ============================== -->
+
+<section class="w-full bg-cyan-900 text-white py-13 px- text-center">
+    <h1 class="text-4xl font-bold mb-4">
+        ¿Necesitas ayuda? Estamos a tu disposición.
+    </h1>
+    <p class="text-xl opacity-90 max-w-3xl mx-auto">
+        Comunícate con el equipo de DS Dev Studio y recibirás una respuesta dentro de las próximas 24 horas.
+    </p>
+</section>
+
+
+<!-- ============================== -->
+<!-- SECCIÓN FORMULARIO DE CONTACTO -->
+<!-- ============================== -->
+
+<section class="w-full py-24 bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+
+            <h2 class="text-3xl font-bold text-cyan-900 mb-6">Contáctanos</h2>
+
+            <p class="text-gray-600 mb-8 leading-relaxed">
+                Puedes escribirnos a <span class="font-semibold">dsdevstudio@gmail.com</span> o enviarnos un mensaje a
+                través
+                del siguiente formulario. Nuestro equipo revisará tu solicitud y te responderá en el menor tiempo
+                posible.
+            </p>
+
+            <form class="space-y-6" (ngSubmit)="enviarFormulario()">
+
+                <!-- Nombre -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-1">Nombre completo</label>
+                    <input [(ngModel)]="form.nombre" name="nombre" type="text" required
+                        class="w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-cyan-900"
+                        placeholder="Tu nombre">
+                </div>
+
+                <!-- Correo -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-1">Correo electrónico</label>
+                    <input [(ngModel)]="form.correo" name="correo" type="email" required
+                        class="w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-cyan-900"
+                        placeholder="tucorreo@gmail.com">
+                </div>
+
+                <!-- Horario -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-1">Horario de atención</label>
+                    <select [(ngModel)]="form.horario" name="horario"
+                        class="w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm" required>
+                        <option value="" disabled selected>Selecciona un horario</option>
+                        <option>Mañana (08:00 - 12:00)</option>
+                        <option>Tarde (12:00 - 17:00)</option>
+                        <option>Noche (17:00 - 21:00)</option>
+                    </select>
+                </div>
+
+                <!-- Mensaje -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-1">Mensaje</label>
+                    <textarea [(ngModel)]="form.mensaje" name="mensaje" rows="5" required
+                        class="w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-cyan-900"
+                        placeholder="Escribe tu mensaje aquí..."></textarea>
+                </div>
+
+                <!-- Botón Enviar -->
+                <button type="submit" class="w-full py-3 bg-cyan-900 text-white rounded-xl text-lg font-semibold
+                 hover:bg-cyan-800 transition-all duration-300 shadow-lg">
+                    Enviar Mensaje
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- ----------------------------------------------------------- -->
+        <!-- LISTA DE SOLICITUDES ENVIADAS -->
+        <!-- ----------------------------------------------------------- -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-200 flex flex-col">
+
+            <h2 class="text-3xl font-bold text-cyan-900 mb-6">Centro de Solicitudes</h2>
+            <p class="text-gray-600 mb-6 leading-relaxed ">
+                Aquí puedes consultar el historial de solicitudes enviadas a nuestro equipo.
+            </p>
+
+            <!-- Botón -->
+            <button (click)="verSolicitudes()" class="w-full py-3 bg-cyan-900 text-white rounded-xl text-lg font-semibold
+               hover:bg-cyan-800 transition-all duration-300 shadow">
+                Lista de Solicitudes
+            </button>
+
+            <!-- Lista -->
+            <div class="mt-8 bg-gray-50 border border-gray-200 rounded-xl p-4 h-full overflow-y-auto">
+
+                <!-- SI NO HAY SOLICITUDES -->
+                <div *ngIf="solicitudes.length === 0" class="text-gray-500 text-center py-6">
+                    No existen solicitudes registradas por el momento.
+                </div>
+
+                <!-- LISTA SI EXISTEN -->
+                <ul *ngIf="solicitudes.length > 0" class="space-y-4">
+                    <li *ngFor="let s of solicitudes" class="p-4 bg-white rounded-xl shadow border border-gray-200">
+                        <p class="font-semibold text-cyan-900">Solicitud enviada</p>
+                        <p class="text-sm text-gray-600 mt-1">Fecha: {{ s.fecha }}</p>
+                        <p class="text-sm text-gray-600">Horario solicitado: {{ s.horario }}</p>
+                        <p class="text-sm text-gray-600 mt-2">{{ s.mensaje }}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================== -->
+<!-- SECCIÓN MAPA Y CONTACTO -->
+<!-- ============================== -->
+
+<section class="w-full py-13 bg-gray-100 px-4" id="contact-section">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+
+        <!-- MAPA -->
+        <div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-200">
+            <h2 class="text-3xl font-extrabold mb-6 text-cyan-900">
+                Ubicación
+            </h2>
+
+            <p class="text-gray-600 text-xl mb-6">Cuenca-Ecuador</p>
+            <p class="text-gray-600 text-sm mb-2 ">Encuéntranos en nuestra sede principal académica y de desarrollo.</p>
+
+            <div class="w-full h-72 md:h-96 rounded-2xl overflow-hidden shadow">
+                <iframe class="w-full h-full"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d397.5078323519012!2d-78.98953248440066!3d-2.886187098505004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91cd1826ff07f153%3A0x755e257e0da78577!2sUniversidad%20Politecnica%20Salesiana!5e0!3m2!1ses!2sec!4v1702315200000!5m2!1ses!2sec"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+
+        <!-- CONTACTO -->
+        <div class="bg-white rounded-3xl shadow-xl p-10 border border-gray-200 flex flex-col justify-center">
+
+            <h2 class="text-3xl font-extrabold text-cyan-900 mb-15">
+                Información de Contacto
+            </h2>
+
+            <div class="space-y-8">
+
+                <!-- Correo + Teléfono -->
+                <div class="flex flex-col md:flex-row md:items-start md:gap-16">
+
+                    <!-- Correo -->
+                    <div class="flex items-start gap-3">
+                        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png"
+                            class="w-7 h-7 opacity-90 mt-1">
+                        <div>
+                            <h3 class="text-xl font-semibold text-cyan-800 mb-1">Correo Empresarial</h3>
+                            <p class="text-gray-600">ds.devstudio04o@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <!-- Teléfono -->
+                    <div class="flex items-start gap-3 mt-6 md:mt-0">
+                        <img src="https://cdn-icons-png.flaticon.com/512/597/597177.png"
+                            class="w-7 h-7 opacity-90 mt-1">
+                        <div>
+                            <h3 class="text-xl font-semibold text-cyan-800 mb-1">Teléfono</h3>
+                            <p class="font-semibold text-cyan-900">Diana Avila</p>
+                            <p class="text-gray-600">+593 93 930 0227</p>
+                            <p class="font-semibold text-cyan-900">Sebastian Cabrera</p>
+                            <p class="text-gray-600">+593 97 911 3444</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Horarios -->
+                <div>
+                    <h3 class="text-xl font-semibold text-cyan-800 mb-3">Horario de Atención</h3>
+
+                    <!-- Horario general -->
+                    <p class="text-gray-600 mb-6">Lunes a Sábado</p>
+
+                    <!-- Contenedor en dos columnas -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                        <!-- Horario Diana -->
+                        <div class="flex items-start gap-3">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1827/1827379.png"
+                                class="w-6 h-6 mt-1 opacity-90">
+                            <div>
+                                <p class="font-semibold text-cyan-900">Diana — Horarios</p>
+                                <p class="opacity-90 text-gray-700">Lunes — 10h00 a 14h00</p>
+                                <p class="opacity-90 text-gray-700">Miércoles — 10h00 a 15h00</p>
+                                <p class="opacity-90 text-gray-700">Viernes — 10h00 a 14h00</p>
+                            </div>
+                        </div>
+
+                        <!-- Horario Sebas -->
+                        <div class="flex items-start gap-3">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1827/1827379.png"
+                                class="w-6 h-6 mt-1 opacity-90">
+                            <div>
+                                <p class="font-semibold text-cyan-900">Sebas — Horarios</p>
+                                <p class="opacity-90 text-gray-700">Martes — 10h00 a 14h00</p>
+                                <p class="opacity-90 text-gray-700">Jueves — 10h00 a 14h00</p>
+                                <p class="opacity-90 text-gray-700">Sábado — 9h00 a 12h00</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+<app-footer></app-footer>

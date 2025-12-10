@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/firebase/auth';
 
@@ -15,33 +15,50 @@ export class Navbar {
   logo = 'assets/logo.png';
 
 
-  authService = inject(AuthService);
-  router = inject(Router);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
-  menuOpen = false;
-  userInitial = '';
-  isProgramador = false;
+  currentUser = this.authService.currentUser;
+  isAuthenticated = this.authService.isAuthenticated;
 
-  constructor() {
-    // Si está logeado, obtener datos
-    if (this.authService.isAuthenticated()) {
+  favoritesService: any;
 
-      const email = this.authService.currentUserEmail;
-      this.userInitial = this.authService.currentUserInitial ?? '';
+  /**
+ * Navega a la página de login
+ */
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+  }
 
+  /**
+   * Verifica si el usuario está autenticado
+   */
+  // isAuthenticated(): boolean {
+  //   return this.authService.isAuthenticated();
+  // }
+    // isAuthenticated = computed(() => this.currentUser() !== null);
 
-      // Correos con permisos
-      const programadores = ['avila.dianam04@gmail.com', 'chicotato04@gmail.com'];
-      this.isProgramador = email !== null && programadores.includes(email);
+  /**
+   * Cierra la sesión del usuario
+   */
+  logout() {
+    if (confirm('¿Cerrar sesión?')) {
+      this.authService.logout().subscribe({
+        next: () => {
+          this.router.navigate(['/login']);
+        },
+        error: (error) => {
+          console.error('Error al cerrar sesión:', error);
+        }
+      });
     }
   }
+  
 
-
-  logout() {
-    this.authService.logout().subscribe(() => {
-      this.router.navigate(['/inicio']);
-    });
-  }
+  /** ------------------------
+  *  SCROLL DE PROYECTOSS
+  * --------------------------
+  */
 
   async scrollToProjects(event: Event) {
     event.preventDefault();
@@ -64,8 +81,40 @@ export class Navbar {
 
     // Espera a que cargue la vista y luego baja
     setTimeout(() => go(), 80);
-    
+
   }
+
+  /** ------------------------
+   *  SCROLL DEL BOTON INICIO
+   * --------------------------
+   * /
+   
+ /** Subir al top sin cambiar la URL visible */
+  private scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /** Comportamiento único del botón Inicio */
+  async goHome(event: Event) {
+    event.preventDefault();
+
+    // Si ya estamos en /inicio, solo subir al top
+    if (this.router.url.includes('/inicio')) {
+      this.scrollToTop();
+      return;
+    }
+
+    // Si estamos en otra ruta, navegar a /inicio y luego subir
+    try {
+      await this.router.navigate(['/inicio']);
+      // Pequeña espera para que la vista se renderice (ajusta si hace falta)
+      setTimeout(() => this.scrollToTop(), 80);
+    } catch (err) {
+      console.error('Error al navegar a /inicio:', err);
+    }
+  }
+
+
 
 
 }

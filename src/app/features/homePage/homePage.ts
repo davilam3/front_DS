@@ -6,7 +6,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, Footer],
   templateUrl: './homePage.html',
   styleUrl: './homePage.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

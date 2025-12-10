@@ -52,6 +52,19 @@ export class RegisterPage {
     });
   }
 
+  registerWithGoogle() {
+  this.authService.loginWithGoogle().subscribe({
+    next: (res) => {
+      console.log('Usuario registrado con Google', res.user);
+      this.router.navigate(['/inicio']); // Redirige al inicio
+    },
+    error: (err) => {
+      console.error('Error al registrarse con Google', err);
+    }
+  });
+}
+
+
   passwordMatchValidator(form: FormGroup) {
     const password = form.get('password');
     const confirmPassword = form.get('confirmPassword');
@@ -74,6 +87,8 @@ export class RegisterPage {
 
     const { email, password } = this.registerForm.value;
 
+    
+
     // this.authService.register(email, password).subscribe({
     //   next: () => {
     //     this.loading.set(false);
@@ -89,6 +104,8 @@ export class RegisterPage {
     // Disparar el registro actualizando el signal
     this.registerTrigger.set({ email, password });
   }
+
+  
 
   // Computed signal para el estado de carga
   loading = this.registerResource.isLoading;

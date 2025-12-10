@@ -1,218 +1,466 @@
-<!-- SECCIÓN HEADER (toda la parte superior) -->
+<!-- ============================== -->
+<!-- SECCIÓN CV COMPLETO -->
+<!-- ============================== -->
+<section class="max-w-6xl mx-auto mt-16 px-6 font-[Montserrat] grid grid-cols-1 lg:grid-cols-3 gap-10">
 
-<section class=" mt-2 mx-70 bg-primary rounded-2xl border-2 text-white flex flex-col justify-center items-center p-5">
+    <!-- ============================== -->
+    <!-- COLUMNA IZQUIERDA -->
+    <!-- ============================== -->
+    <div class="bg-cyan-900 text-white rounded-3xl shadow-xl p-8 flex flex-col items-center gap-6">
 
-    <!-- Nombre principal -->
-    <h1 class="text-5xl font-bold">Sebastián Cabrera</h1>
+        <!-- FOTO -->
+        <img src="assets/sebascara.jpeg" class="w-40 h-40 object-cover rounded-2xl shadow-lg border-4 border-white">
 
-    <p class="text-center leading-relaxed m-4">
-        Soy un desarrollador apasionado por crear interfaces modernas, fluidas
-        y con un enfoque centrado en la experiencia del usuario.
-        Me encanta aprender nuevas tecnologías y aplicar buenas prácticas
-        en cada proyecto.
-    </p>
+        <!-- NOMBRE -->
+        <h2 class="text-3xl font-extrabold tracking-wide text-center">
+            Sebastián Cabrera
+        </h2>
 
-</section>
+        <p class="text-center opacity-90">Frontend Developer</p>
 
-<!-- STACK TECNOLÓGICO – SLIDER HORIZONTAL -->
+        <!-- INFO -->
+        <div class="w-full flex flex-col gap-4 text-sm">
 
-<section class="w-full max-w-5xl mx-auto p-8">
-    <h2 class="text-3xl font-bold mb-6 text-center">Stack Tecnológico</h2>
-
-    <div class="relative w-full">
-
-        <!-- Botón Izquierda -->
-        <button onclick="document.getElementById('slider').scrollLeft -= 300"
-            class="btn btn-circle absolute left-0 top-1/2 -translate-y-1/2 z-10">
-            ❮
-        </button>
-
-        <!-- SLIDER -->
-        <div id="slider" class="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar px-12 py-4">
-
-            <!-- ITEM 1 -->
-            <div class="min-w-[150px] bg-base-200 rounded-xl flex flex-col items-center p-4 shadow">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsPdep6Y9ZJLRs3yCLdoUt_pH2FGiZhlao9Q&s"
-                    class="w-24 h-24 object-contain">
-                <p class="font-semibold mt-2">Angular</p>
+            <div class="flex items-start gap-3">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" class="w-5 h-5">
+                <div>
+                    <h3 class=" font-semibold text-amber-50 mb-1">Correo Empresarial</h3>
+                    <span>dsdevstudio@gmail.com</span>
+                </div>
             </div>
 
-            <!-- ITEM 2 -->
-            <div class="min-w-[150px] bg-base-200 rounded-xl flex flex-col items-center p-4 shadow">
-                <img src="https://images.icon-icons.com/2108/PNG/512/react_icon_130845.png"
-                    class="w-24 h-24 object-contain">
-                <p class="font-semibold mt-2">React</p>
-            </div>
-
-            <!-- ITEM 3 -->
-            <div class="min-w-[150px] bg-base-200 rounded-xl flex flex-col items-center p-4 shadow">
-                <img src="https://img.icons8.com/color/1200/firebase.jpg" class="w-24 h-24 object-contain">
-                <p class="font-semibold mt-2">Firebase</p>
-            </div>
-
-            <!-- ITEM 4 -->
-            <div class="min-w-[150px] bg-base-200 rounded-xl flex flex-col items-center p-4 shadow">
-                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" class="w-24 h-24 object-contain">
-                <p class="font-semibold mt-2">JavaScript</p>
-            </div>
-
-            <!-- ITEM 5 -->
-            <div class="min-w-[150px] bg-base-200 rounded-xl flex flex-col items-center p-4 shadow">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg"
-                    class="w-24 h-24 object-contain">
-                <p class="font-semibold mt-2">CSS</p>
-            </div>
-            <!-- ITEM 6 -->
-            <div class="min-w-[150px] bg-base-200 rounded-xl flex flex-col items-center p-4 shadow">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg"
-                    class="w-24 h-24 object-contain">
-                <p class="font-semibold mt-2">HTML</p>
-            </div>
-            <!-- ITEM 7 -->
-            <div class="min-w-[150px] bg-base-200 rounded-xl flex flex-col items-center p-4 shadow">
-                <img src="data:image/png;base64,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"
-                    class="w-24 h-24 object-contain">
-                <p class="font-semibold mt-2">GitHub</p>
+             <div class="flex items-start gap-3">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" class="w-5 h-5">
+                <div>
+                    <h3 class=" font-semibold text-amber-50 mb-1">Correo Personal</h3>
+                    <span>chicotato04@gmail.com</span>
+                </div>
             </div>
 
 
-            <!-- Botón Derecha -->
-            <button onclick="document.getElementById('slider').scrollLeft += 300"
-                class="btn btn-circle absolute right-0 top-1/2 -translate-y-1/2 z-10">
-                ❯
-            </button>
+            <div class="flex items-center gap-3">
+                <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" class="w-5 h-5">
+                <span>+593 97 911 3444</span>
+            </div>
 
+            <div class="flex items-center gap-3">
+                <img src="https://cdn-icons-png.flaticon.com/512/535/535137.png" class="w-5 h-5">
+                <span>Cuenca - Ecuador</span>
+            </div>
+
+            <div class="flex items-start gap-3">
+                <img src="https://cdn-icons-png.flaticon.com/512/1827/1827379.png" class="w-5 h-5 mt-1">
+                <div>
+                    <p class="font-semibold">Horarios</p>
+                    <p class="opacity-90">Martes — 10h00 a 14h00</p>
+                    <p class="opacity-90">Jueves — 10h00 a 14h00</p>
+                    <p class="opacity-90">Sábado — 9h00 a 12h00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Habilidades -->
+
+        <h3 class="text-2xl font-bold mt-8 text-center">Habilidades</h3>
+
+        <div class="grid grid-cols-2 gap-10 mt-4 justify-items-center">
+
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsPdep6Y9ZJLRs3yCLdoUt_pH2FGiZhlao9Q&s"
+                class="h-32 w-32 object-contain hover:scale-110 transition-transform" />
+
+            <img src="https://images.icon-icons.com/2108/PNG/512/react_icon_130845.png"
+                class="h-32 w-32 object-contain hover:scale-110 transition-transform" />
+
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg"
+                class="h-32 w-32 object-contain hover:scale-110 transition-transform" />
+
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg"
+                class="h-32 w-32 object-contain hover:scale-110 transition-transform" />
+
+        </div>
+        <div class="flex justify-center mt-6">
+            <a href="https://github.com/Ccabreram1" target="_blank"
+                class="flex items-center gap-4 bg-cyan-950 text-white py-3 px-6 rounded-2xl shadow-lg hover:scale-105 transition-transform hover:bg-black">
+
+                <!-- Logo GitHub -->
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" class="h-10 w-10 invert" />
+
+                <!-- Texto -->
+                <span class="text-lg font-semibold tracking-wide text-center">
+                    Visitar mi perfil en GitHub
+                </span>
+            </a>
+        </div>
+
+
+
+    </div>
+
+    <!-- ============================== -->
+    <!-- COLUMNA DERECHA (2 COLUMNAS) -->
+    <!-- ============================== -->
+    <div class="lg:col-span-2 flex flex-col gap-10">
+
+        <!-- ============================== -->
+        <!-- SOBRE MÍ -->
+        <!-- ============================== -->
+        <div class="bg-white rounded-3xl shadow-xl p-8 border border-cyan-500">
+
+            <h2 class="text-3xl font-extrabold mb-4 text-cyan-900">Sobre mí</h2>
+
+            <p class="text-gray-700 leading-relaxed">
+                Soy un desarrollador Frontend especializado en Angular y React, centrado en crear
+                interfaces modernas, rápidas y visualmente atractivas. Me gusta trabajar con buenas
+                prácticas, arquitectura limpia y diseño intuitivo enfocado en el usuario.
+            </p>
+
+        </div>
+        <!-- ============================== -->
+        <!-- EDUCACIÓN -->
+        <!-- ============================== -->
+        <div class="bg-white rounded-3xl shadow-xl p-8 border border-cyan-500">
+            <h2 class="text-3xl font-extrabold mb-6 text-cyan-900">Educación</h2>
+
+            <div class="mb-4">
+                <h3 class="text-xl font-bold text-cyan-800">Universidad Politécnica Salesiana</h3>
+                <p class="text-sm opacity-75">Estudiante de Ingeniería en Ciencias de la Computación</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- Cursos -->
+                <div>
+                    <h3 class="text-xl font-bold text-cyan-800">Cursos</h3>
+                    <ul class="list-disc ml-6 text-gray-700 leading-relaxed mt-2">
+                        <li>Angular Básico</li>
+                        <li>Fundamentos de React</li>
+                        <li>Introducción a UX/UI</li>
+                    </ul>
+                </div>
+
+                <!-- Idiomas -->
+                <div>
+                    <h3 class="text-xl font-bold text-cyan-800">Idiomas</h3>
+                    <ul class="list-disc ml-6 text-gray-700 leading-relaxed mt-2">
+                        <li>Español (Nativo)</li>
+                        <li>Inglés (A2)</li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ============================== -->
+        <!-- EXPERIENCIA LABORAL Y ACADÉMICA -->
+        <!-- ============================== -->
+        <div class="bg-white rounded-3xl shadow-xl p-8 border border-cyan-500">
+
+            <h2 class="text-3xl font-extrabold mb-6 text-cyan-900">Experiencia</h2>
+
+            <!-- Universidad -->
+            <div class="mb-6">
+                <h3 class="text-xl font-bold text-cyan-800">
+                    Estudiante de Ingeniería en Ciencias de la Computación — UPS
+                </h3>
+                <p class="text-sm opacity-75 mb-2">2023 - Actualidad </p>
+                <ul class="list-disc ml-6 text-gray-700 leading-relaxed">
+                    <li>Formación en desarrollo web, arquitectura del computador y bases de datos.</li>
+                    <li>Participación en proyectos académicos enfocados en usabilidad, UI y algoritmos.</li>
+                    <li>Desarrollo continuo de habilidades en Angular, React.</li>
+                </ul>
+            </div>
+
+            <!-- Proyectos Laborales -->
+            <div class="mb-6">
+                <h3 class="text-xl font-bold text-cyan-800">
+                    Frontend Developer — Proyectos Freelance
+                </h3>
+                <p class="text-sm opacity-75 mb-2">2024</p>
+                <ul class="list-disc ml-6 text-gray-700 leading-relaxed">
+                    <li>Desarrollo de interfaces modernas con Angular y React.</li>
+                    <li>Optimización de rendimiento, Lazy Loading y componentes reutilizables.</li>
+                    <li>Integración de APIs, SPA y mejoras de accesibilidad.</li>
+                </ul>
+            </div>
+
+            <!-- Proyectos Académicos 2025 -->
+            <div>
+                <h3 class="text-xl font-bold text-cyan-800">
+                    UI Designer & Frontend Developer — Proyectos Académicos
+                </h3>
+                <p class="text-sm opacity-75 mb-2">2025- Actualidad</p>
+                <ul class="list-disc ml-6 text-gray-700 leading-relaxed">
+                    <li>Creación de componentes escalables y accesibles en Angular.</li>
+                    <li>Implementación de heurísticas de usabilidad en aplicaciones educativas.</li>
+                    <li>Diseño de interfaces minimalistas con Tailwind y UX centrado en el usuario.</li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
 
 
-<!-- SECCIÓN PROYECTOS        -->
+<!-- ============================== -->
+<!-- ÁREAS DE DOMINIO TECNOLÓGICO -->
+<!-- ============================== -->
 
-<section>
+<section class="max-w-10xl mx-70 mt-3 px-6 font-[Montserrat] grid grid-cols-1 lg:grid-cols-1 gap-10">
+    <div class="bg-white rounded-3xl shadow-lg p-6 border mt-10 border-cyan-500">
 
-    <div class="max-w-6xl mx-auto px-8">
+        <h2 class="text-2xl font-extrabold mb-3 text-cyan-900">
+            Áreas de Dominio Tecnológico
+        </h2>
 
-        <h2 class="text-3xl font-bold mb-10 text-center">Proyectos</h2>
+        <p class="text-gray-600 text-sm mb-6 max-w-2xl">
+            Brindo soluciones centradas en el desarrollo frontend, diseño orientado al usuario
+            y la implementación de interfaces modernas y eficientes.
+        </p>
 
-        <!-- GRID DE PROYECTOS -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <!-- GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-            <!-- PROYECTO 1 -->
-            <div class="p-5 bg-white rounded-xl shadow hover:shadow-xl transition cursor-pointer 
-            flex flex-col justify-between h-full">
-
-                <div class="text-center">
-                    <h3 class="text-xl font-bold mb-2">Fundamentos</h3>
-
-                    <p class="text-gray-600 mb-4">
-                        Este proyecto corresponde a la unidad de Fundamentos de Programación Web,
-                        donde se aplican los conceptos esenciales para la creación de páginas web
-                        estáticas utilizando HTML y CSS puro.
-                    </p>
-                </div>
-
-                <a href="https://ccabreram1.github.io/icc-ppw-u2-01Fundamentos/" target="_blank"
-                    class="btn btn-primary btn-sm w-full mt-4">
-                    Ver
-                </a>
-
-            </div>
-
-
-            <!-- PROYECTO 2 -->
-            <div class="p-5 bg-white rounded-xl shadow hover:shadow-xl transition cursor-pointer 
-            flex flex-col justify-between h-full">
-                <div class="text-center">
-                    <h3 class="text-xl font-bold mb-2 text-center">Heurísticas</h3>
-
-                    <p class="text-gray-600 mb-4">
-                        Este proyecto está enfocado en el estudio y aplicación de heurísticas de usabilidad,
-                        principios que permiten evaluar y mejorar la experiencia del usuario en interfaces digitales.
-                    </p>
-                </div>
-
-                <a href="https://ccabreram1.github.io/icc-ppw-u2-02-ui-componentes/" target="_blank"
-                    class="btn btn-primary btn-sm w-full mt-auto">
-                    Ver
-                </a>
-            </div>
-
-
-            <!-- PROYECTO Componentes Estilos -->
-            <div class="p-5 bg-white rounded-xl shadow hover:shadow-xl transition cursor-pointer 
-            flex flex-col justify-between h-full">
-                <div class="text-center">
-                    <h3 class="text-xl font-bold mb-2 text-center">Componentes-Estilos</h3>
-
-                    <p class="text-gray-600 mb-4 text-center">
-                        Este proyecto aplica el concepto de componentes UI estilizados,
-                        llevando el diseño un nivel más arriba mediante estilos avanzados.
-                    </p>
-                </div>
-
-
-                <a href="https://ccabreram1.github.io/icc-ppw-u3-03-ui-componentes-estilos/" target="_blank"
-                    class="btn btn-primary btn-sm w-full mt-auto">
-                    Ver
-                </a>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- SECCIÓN DE CONTACTO -->
-
-<section id="contacto" class="w-full max-w-5xl mx-auto p-10">
-    <h2 class="text-3xl font-bold text-center mb-8">Contacto</h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-
-        <!-- TARJETA DE INFORMACIÓN -->
-        <div class="space-y-6">
             <!-- Card 1 -->
-            <div class="bg-base-200 p-6 rounded-xl shadow">
-                <h3 class="text-xl font-semibold mb-2">Email</h3>
-                <p class="text-gray-600">chicotato04@gmail.com</p>
+            <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl shadow-sm hover:shadow-md transition">
+                <span class="text-cyan-900 text-3xl">💻</span>
+                <div>
+                    <h3 class="text-lg font-bold text-cyan-900">Front-End con Angular & React</h3>
+                    <p class="text-gray-700 text-sm mt-1">
+                        Interfaces dinámicas, SPA, componentes reutilizables y arquitecturas escalables.
+                    </p>
+                </div>
             </div>
 
             <!-- Card 2 -->
-            <div class="bg-base-200 p-6 rounded-xl shadow">
-                <h3 class="text-xl font-semibold mb-2">Teléfono</h3>
-                <p class="text-gray-600">+593 97 911 3444</p>
+            <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl shadow-sm hover:shadow-md transition">
+                <span class="text-cyan-900 text-3xl">🎨</span>
+                <div>
+                    <h3 class="text-lg font-bold text-cyan-900">HTML5, CSS3 & TailwindCSS</h3>
+                    <p class="text-gray-700 text-sm mt-1">
+                        Diseño responsivo, accesible y optimizado bajo estándares modernos.
+                    </p>
+                </div>
             </div>
 
             <!-- Card 3 -->
-            <div class="bg-base-200 p-6 rounded-xl shadow">
-                <h3 class="text-xl font-semibold mb-2">Ubicación</h3>
-                <p class="text-gray-600">Cuenca-Ecuador</p>
+            <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl shadow-sm hover:shadow-md transition">
+                <span class="text-cyan-900 text-3xl">🛠️</span>
+                <div>
+                    <h3 class="text-lg font-bold text-cyan-900">Git & GitHub</h3>
+                    <p class="text-gray-700 text-sm mt-1">
+                        Flujo profesional de versiones, ramas y colaboración en proyectos.
+                    </p>
+                </div>
             </div>
+
+            <!-- Card 4 -->
+            <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl shadow-sm hover:shadow-md transition">
+                <span class="text-cyan-900 text-3xl">📐</span>
+                <div>
+                    <h3 class="text-lg font-bold text-cyan-900">Diseño UI/UX</h3>
+                    <p class="text-gray-700 text-sm mt-1">
+                        Prototipos funcionales, heurísticas de usabilidad y experiencia centrada en el usuario.
+                    </p>
+                </div>
+            </div>
+
         </div>
-
-        <!-- FORMULARIO -->
-        <form action="https://formsubmit.co/chicotato04@gmail.com" method="POST" class="space-y-4">
-
-            <input type="text" name="nombre" placeholder="Tu nombre" required class="input input-bordered w-full">
-
-            <input type="email" name="correo" placeholder="Tu correo" required class="input input-bordered w-full">
-
-            <textarea name="mensaje" placeholder="Escribe tu mensaje" required
-                class="textarea textarea-bordered w-full"></textarea>
-
-            <!-- Configuración de FormSubmit -->
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="box">
-            <input type="hidden" name="_next" value="http://localhost:4200/sebas/">
-
-            <button type="submit" class="btn btn-primary w-full">
-                Enviar mensaje
-            </button>
-
-        </form>
-
     </div>
 </section>
+
+
+<!-- ============================== -->
+<!-- SECCIÓN PROYECTOS -->
+<!-- ============================== -->
+<section class="max-w-6xl mx-auto mt-15 px-6 font-[Montserrat]">
+
+    <div class="bg-white rounded-3xl shadow-xl p-8 border border-cyan-500">
+        <h2 class="text-3xl font-extrabold mb-10 text-cyan-900 text-center">
+            Proyectos
+        </h2>
+
+        <!-- GRID DE CARDS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+            <!-- CARD 1 -->
+            <div
+                class="bg-white rounded-2xl border border-cyan-400 shadow-lg p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+
+                <h3 class="text-xl font-bold text-cyan-800 mb-2">
+                    Sistema de Pedidos — Angular
+                </h3>
+                <p class="text-sm opacity-70 mb-4">Realizado por Sebastián Cabrera 2023</p>
+
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    App tipo kiosco de KFC con patrón Decorator, cálculo dinámico y carrito interactivo.
+                </p>
+
+
+
+                <div class="flex justify-between mt-auto">
+                    <a href="#" target="_blank"
+                        class="px-4 py-2 bg-cyan-700 text-white rounded-xl shadow hover:bg-cyan-800 transition">
+                        Ver proyecto
+                    </a>
+
+                    <a href="#" target="_blank" class="hover:scale-110 transition">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" class="w-9 h-9" alt="GitHub">
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- CARD 2 -->
+            <div
+                class="bg-white rounded-2xl border border-cyan-400 shadow-lg p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+
+                <h3 class="text-xl font-bold text-cyan-800 mb-2">
+                    Dashboard Financiero — React
+                </h3>
+                <p class="text-sm opacity-70 mb-4">Realizado por Sebastián Cabrera 2024</p>
+
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    Panel con gráficos dinámicos, filtros avanzados y diseño profesional responsive.
+                </p>
+
+                <div class="flex justify-between mt-auto">
+                    <a href="#" target="_blank"
+                        class="px-4 py-2 bg-cyan-700 text-white rounded-xl shadow hover:bg-cyan-800 transition">
+                        Ver proyecto
+                    </a>
+
+                    <a href="#" target="_blank" class="hover:scale-110 transition">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" class="w-9 h-9" alt="GitHub">
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- CARD 3 -->
+            <div
+                class="bg-white rounded-2xl border border-cyan-400 shadow-lg p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+
+                <h3 class="text-xl font-bold text-cyan-800 mb-2">
+                    Portafolio Profesional — Angular
+                </h3>
+                <p class="text-sm opacity-70 mb-4">Realizado por Diana y Sebastian 2024</p>
+
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    Portafolio moderno, animado y optimizado para SEO con Tailwind + Angular.
+                </p>
+
+                <div class="flex justify-between mt-auto">
+                    <a href="#" target="_blank"
+                        class="px-4 py-2 bg-cyan-700 text-white rounded-xl shadow hover:bg-cyan-800 transition">
+                        Ver proyecto
+                    </a>
+
+                    <a href="#" target="_blank" class="hover:scale-110 transition">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" class="w-9 h-9" alt="GitHub">
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- CARD 4 -->
+            <div
+                class="bg-white rounded-2xl border border-cyan-400 shadow-lg p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+
+                <h3 class="text-xl font-bold text-cyan-800 mb-2">
+                    Formulario Dinamico -- Angular
+                </h3>
+                <p class="text-sm opacity-70 mb-4">Realizado por Sebastián Cabrera 2025</p>
+
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    Enfoque en aprendizaje de fundamentos, buenas prácticas y organización de proyecto.
+                </p>
+
+                <div class="flex justify-between mt-auto">
+                    <a href="https://ccabreram1.github.io/icc-ppw-u2-01Fundamentos/" target="_blank"
+                        class="px-4 py-2 bg-cyan-700 text-white rounded-xl shadow hover:bg-cyan-800 transition">
+                        Ver proyecto
+                    </a>
+
+                    <a href="https://github.com/Ccabreram1/icc-ppw-u2-01Fundamentos.git" target="_blank"
+                        class="hover:scale-110 transition">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" class="w-9 h-9" alt="GitHub">
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- CARD 5 -->
+            <div
+                class="bg-white rounded-2xl border border-cyan-400 shadow-lg p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+
+                <h3 class="text-xl font-bold text-cyan-800 mb-2">
+                    Heuristicas --Angular
+                </h3>
+                <p class="text-sm opacity-70 mb-4">Realizado por Sebastián Cabrera 2025</p>
+
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    Demostración de las 10 heurísticas de Nielsen en Angular con ejemplos malos y buenos de usabilidad.
+
+                </p>
+
+                <div class="flex justify-between mt-auto">
+                    <a href="https://ccabreram1.github.io/icc-ppw-u2-02-ui-componentes/" target="_blank"
+                        class="px-4 py-2 bg-cyan-700 text-white rounded-xl shadow hover:bg-cyan-800 transition">
+                        Ver proyecto
+                    </a>
+
+                    <a href="https://github.com/Ccabreram1/icc-ppw-u2-02-ui-componentes.git" target="_blank"
+                        class="hover:scale-110 transition">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" class="w-9 h-9" alt="GitHub">
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- CARD 6 -->
+            <div
+                class="bg-white rounded-2xl border border-cyan-400 shadow-lg p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+
+                <h3 class="text-xl font-bold text-cyan-800 mb-2">
+                    Componentes y Estilos -- Angular
+                </h3>
+                <p class="text-sm opacity-70 mb-4">Realizado por Sebastián Cabrera 2025</p>
+
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    Demostracion de creación de componentes reutilizables y estilos globales en Angular.
+                </p>
+
+                <div class="flex justify-between mt-auto">
+                    <a href="https://ccabreram1.github.io/icc-ppw-u3-03-ui-componentes-estilos/" target="_blank"
+                        class="px-4 py-2 bg-cyan-700 text-white rounded-xl shadow hover:bg-cyan-800 transition">
+                        Ver proyecto
+                    </a>
+
+                    <a href="https://github.com/Ccabreram1/icc-ppw-u3-03-ui-componentes-estilos.git" target="_blank"
+                        class="hover:scale-110 transition">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" class="w-9 h-9" alt="GitHub">
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<!--Contratar servicios -->
+<section>
+
+    <div class="w-full mt-8 text-center">
+        <p class="text-sm opacity-90 mb-4">
+            ¿Deseas contratar nuestros servicios o hablar sobre un proyecto?
+        </p>
+        <a routerLink="/contacto" class="inline-block bg-white text-cyan-900 font-semibold py-3 px-6 rounded-2xl shadow-lg
+               hover:scale-105 hover:bg-gray-100 transition-transform tracking-wide">
+            Ir a contacto
+        </a>
+    </div>
+</section>
+
+<app-footer></app-footer>
