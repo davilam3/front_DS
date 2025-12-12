@@ -14,7 +14,7 @@ import { GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login-page',
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, Footer],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './login-page.html',
   styleUrl: './login-page.css',
 })

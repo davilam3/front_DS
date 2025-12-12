@@ -1,5 +1,5 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, User, user } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, signOut, User, user } from '@angular/fire/auth';
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 
@@ -23,12 +23,6 @@ export class AuthService {
     // Observable del estado de autenticación
     user$ = user(this.auth);
 
-    // constructor() {
-      // Suscribirse a cambios en el estado de autenticación
-    //   this.user$.subscribe(user => {
-    //     this.currentUser.set(user);
-    //   });
-    // }
     constructor() {
         onAuthStateChanged(this.auth, async (user) => {
             this.currentUser.set(user);
@@ -40,7 +34,6 @@ export class AuthService {
             }
         });
     }
-
 
     /**
      * Registrar nuevo usuario con email y password
@@ -61,12 +54,12 @@ export class AuthService {
     /**
      * Login con Google
      */
-    loginWithGoogle(): Observable<any> {
-        const provider = new GoogleAuthProvider();
-        const promise = signInWithPopup(this.auth, provider);
-        return from(promise);
-    }
-
+   loginWithGoogle(): Observable<any> {
+    const provider = new GoogleAuthProvider();
+    // Esto fuerza a que el usuario siempre seleccione cuenta
+    provider.setCustomParameters({ prompt: 'select_account' });
+    return from(signInWithPopup(this.auth, provider));
+}
     /**
       * Cerrar sesión
       */
@@ -87,13 +80,13 @@ export class AuthService {
         try {
             console.log('🔍 Buscando rol en Firestore para UID:', uid);
             const userDoc = await getDoc(doc(this.firestore, 'usuarios', uid));
-            
+
             if (!userDoc.exists()) {
                 console.warn('⚠️ Documento no existe en Firestore para UID:', uid);
                 this.userRole.set('usuario');
                 return;
             }
-            
+
             const rol = userDoc.data()?.['rol'] || 'usuario';
             console.log('✅ Rol encontrado en Firestore:', rol);
             this.userRole.set(rol as 'admin' | 'programador' | 'usuario');
