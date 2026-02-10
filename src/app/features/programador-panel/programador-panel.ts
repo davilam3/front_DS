@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RolesService } from '../../core/services/roles.service';
-import { ProjectsService } from '../../core/services/projects.service';
-import { AsesoriasService } from '../../core/services/asesorias.service';
+import { AuthService } from '../../core/services/auth.service';
+import { ProjectService } from '../../core/services/project.service';
+import { AdvisoryService } from '../../core/services/advisory.service';
 
 @Component({
   selector: 'app-programador-panel',
@@ -13,11 +13,12 @@ import { AsesoriasService } from '../../core/services/asesorias.service';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class ProgramadorPanel {
-  private rolesService = inject(RolesService);
-  private projectsService = inject(ProjectsService);
-  private asesoriasService = inject(AsesoriasService);
 
-  uid = '';
+  private authService = inject(AuthService);
+  private projectService = inject(ProjectService);
+  private advisoryService = inject(AdvisoryService);
+
+  userId!: number;
   proyectos: any[] = [];
   asesorias: any[] = [];
 
@@ -25,61 +26,71 @@ export class ProgramadorPanel {
     this.init();
   }
 
-  async init() {
-    const usuario = await this.rolesService.obtenerDatosUsuarioActual();
-    if (!usuario) return;
-    this.uid = usuario.uid;
-    await this.loadProyectos();
-    await this.loadAsesorias();
+  init() {
+    const user = this.authService.getCurrentUser();
+    if (!user) return;
+
+    this.userId = user.id;
+
+    this.loadProyectos();
+    this.loadAsesorias();
   }
 
-  async loadProyectos() {
-    if (!this.uid) return;
-    this.proyectos = await this.projectsService.obtenerProyectosPorProgramador(this.uid);
+  // ==========================
+  // PROYECTOS
+  // ==========================
+
+  loadProyectos() {
+    this.projectService.getAll()
+      .subscribe(data => {
+        this.proyectos = data.filter(
+          (p: any) => p.programmerId === this.userId
+        );
+      });
   }
 
-  async crearProyectoHandler() {
-    const nombre = prompt('Nombre del proyecto:');
-    if (!nombre) return;
-    const descripcion = prompt('Descripción:') || '';
-    await this.projectsService.crearProyecto(this.uid, { nombre, descripcion });
-    await this.loadProyectos();
+  crearProyecto(nombre: string, descripcion: string) {
+    this.projectService.create({
+      name: nombre,
+      description: descripcion,
+      programmerId: this.userId
+    }).subscribe(() => this.loadProyectos());
   }
 
-  async editarProyectoHandler(project: any) {
-    const nombre = prompt('Nombre:', project.nombre) || project.nombre;
-    const descripcion = prompt('Descripción:', project.descripcion) || project.descripcion;
-    await this.projectsService.actualizarProyecto(project.id, { nombre, descripcion });
-    await this.loadProyectos();
+  editarProyecto(project: any) {
+    this.projectService.update(project.id, {
+      name: project.name,
+      description: project.description
+    }).subscribe(() => this.loadProyectos());
   }
 
-  async eliminarProyectoHandler(id: string) {
-    if (!confirm('Eliminar proyecto?')) return;
-    await this.projectsService.eliminarProyecto(id);
-    await this.loadProyectos();
+  eliminarProyecto(id: number) {
+    this.projectService.delete(id)
+      .subscribe(() => this.loadProyectos());
   }
 
-  async loadAsesorias() {
-    if (!this.uid) return;
-    const raw = await this.asesoriasService.obtenerSolicitudesPorProgramador(this.uid);
-    // Enriquecer cada solicitud con el email del solicitante (si existe)
-    const enriched = await Promise.all(raw.map(async (r: any) => {
-      if (!r.solicitanteUid) return { ...r, solicitanteEmail: null };
-      try {
-        const u = await this.rolesService.obtenerUsuarioPorId(r.solicitanteUid);
-        return { ...r, solicitanteEmail: u?.email || null };
-      } catch (err) {
-        console.error('Error obteniendo solicitante:', err);
-        return { ...r, solicitanteEmail: null };
-      }
-    }));
+  // ==========================
+  // ASESORIAS
+  // ==========================
 
-    this.asesorias = enriched;
+  loadAsesorias() {
+    this.advisoryService.getAll()
+      .subscribe(data => {
+        this.asesorias = data.filter(
+          (a: any) => a.programmerId === this.userId
+        );
+      });
   }
 
-  async responderAsesoria(id: string, estado: 'aceptada' | 'rechazada') {
-    const respuesta = prompt('Mensaje de confirmación/rechazo (opcional):') || '';
-    await this.asesoriasService.actualizarEstadoSolicitud(id, estado, respuesta);
-    await this.loadAsesorias();
+  responderAsesoria(id: number, estado: 'approve' | 'reject') {
+    const message = prompt('Mensaje (opcional):') || '';
+
+    if (estado === 'approve') {
+      this.advisoryService.approve(id, message)
+        .subscribe(() => this.loadAsesorias());
+    } else {
+      this.advisoryService.reject(id, message)
+        .subscribe(() => this.loadAsesorias());
+    }
   }
 }

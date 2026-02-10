@@ -1,72 +1,40 @@
-<!-- ============================== -->
-<!-- SECCIÓN HERO ANIMADA -->
-<!-- ============================== -->
-
-<section class="relative w-full px-6 pt-40 pb-32 bg-linear-to-b from-white to-gray-100 overflow-hidden">
-
-  <!-- FONDOS DECORATIVOS -->
-  <div class="absolute inset-0 -z-10 opacity-10">
-    <div class="absolute top-10 left-20 w-72 h-72 bg-cyan-300 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-10 right-20 w-80 h-80 bg-blue-500 rounded-full blur-3xl"></div>
-  </div>
-
-  <!-- CONTENEDOR PRINCIPAL -->
-  <div class="max-w-5xl mx-auto flex flex-col items-center text-center">
-
-    <!-- TÍTULO CON SLIDE-IN -->
-    <h1 class="slide-in text-7xl md:text-8xl font-extrabold tracking-tight text-cyan-900 drop-shadow-sm">
-      D&S<span class="text-cyan-600"> DevStudio</span>
-    </h1>
-
-    <!-- SUBTÍTULO FADE-UP -->
-    <p class="fade-up mt-6 text-2xl md:text-3xl text-gray-700 font-light italic">
-      Innovación, desarrollo y aprendizaje continuo.
-    </p>
-
-    <!-- DESCRIPCIÓN FADE-UP -->
-    <p class="fade-up mt-10 text-xl md:text-2xl text-gray-700 max-w-3xl leading-relaxed">
-      Somos Diana y Sebastián, estudiantes apasionados por el desarrollo web,
-      la tecnología y la construcción de experiencias digitales que marcan la diferencia.
-    </p>
-
-    <p class="fade-up mt-4 text-xl md:text-2xl text-gray-700 max-w-3xl leading-relaxed">
-      En este portafolio encontrarás nuestros proyectos, aplicaciones,
-      colaboraciones y nuestro progreso profesional dentro del mundo tech.
-    </p>
-
-  </div>
-</section>
-
-<!-- ============================== -->
-<!-- SECCIÓN CARDS -->
-<!-- ============================== -->
-
 <section id="equipo" class="w-full flex flex-col items-center mt-16 px-5 pt-20">
 
-  <!-- TÍTULO DE LA SECCIÓN -->
+  <!-- TÍTULO -->
   <div class="text-center mb-14">
     <h2 class="text-4xl md:text-5xl font-extrabold tracking-wide text-cyan-900 font-serif">
       Equipo de Programadores
     </h2>
     <p class="mt-3 text-lg md:text-xl text-gray-600 max-w-2xl">
-      Conoce a los developers que impulsan este proyecto, combinando creatividad,
-      análisis técnico y experiencia en ingeniería de software.
+      Conoce a los developers que impulsan este proyecto.
     </p>
   </div>
 
-  <!-- FOR PARA LAS CARDS -->
+  <!-- SI NO HAY PROGRAMADORES -->
+  <div *ngIf="programadores.length === 0" class="text-gray-500 text-lg">
+    No hay programadores registrados aún.
+  </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-2xl">
+  <!-- GRID DINÁMICO -->
+  <div *ngIf="programadores.length > 0"
+       class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-4xl">
+
     <div *ngFor="let p of programadores"
-      class="card bg-white shadow-lg hover:shadow-2xl hover:-translate-y-2 duration-300 w-80 rounded-2xl border border-gray-200">
+         class="card bg-white shadow-lg hover:shadow-2xl hover:-translate-y-2 duration-300 rounded-2xl border border-gray-200">
 
       <figure class="p-4">
-        <img [src]="p.fotoURL" class="h-56 w-full object-cover rounded-xl shadow-md" />
+        <img [src]="p.fotoURL || 'assets/default-user.png'"
+             class="h-56 w-full object-cover rounded-xl shadow-md" />
       </figure>
 
       <div class="card-body text-center">
-        <h2 class="text-2xl font-bold text-cyan-900">{{ p.nombre }}</h2>
-        <p class="font-medium text-gray-700">{{ p.especialidad }}</p>
+        <h2 class="text-2xl font-bold text-cyan-900">
+          {{ p.nombre }}
+        </h2>
+
+        <p class="font-medium text-gray-700">
+          {{ p.especialidad }}
+        </p>
 
         <p class="text-gray-500 text-sm mt-2">
           Estudiante de Computación – UPS
@@ -74,260 +42,22 @@
 
         <div class="w-40 h-1 bg-cyan-900 mx-auto my-4 rounded-full"></div>
 
-        <!-- SKILLS -->
+        <!-- SKILLS DINÁMICAS -->
         <div class="flex flex-wrap justify-center gap-2">
-          <span *ngFor="let skill of p.skills" class="badge badge-outline border-cyan-900">{{ skill }}</span>
+          <span *ngFor="let skill of p.skills"
+                class="badge badge-outline border-cyan-900">
+            {{ skill }}
+          </span>
         </div>
 
         <div class="mt-6">
-          <a [routerLink]="p.perfilRoute" class="btn btn-primary w-full">Ver Perfil</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- AQUÍ VAN TUS CARDS -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-2xl">
-
-    <!-- CARD DIANA -->
-    <div class="card bg-white shadow-lg hover:shadow-2xl hover:-translate-y-2 
-                  duration-300 w-80 rounded-2xl border border-gray-200">
-
-      <figure class="p-4">
-        <img src="assets/DianaA.jpeg" class="h-56 w-full object-cover rounded-xl shadow-md" />
-      </figure>
-
-      <div class="card-body text-center">
-        <h2 class="text-2xl font-bold text-cyan-900">Diana Avila</h2>
-        <p class="font-medium text-gray-700">Desarrolladora Web</p>
-
-        <p class="text-gray-500 text-sm mt-2">
-          Estudiante de Computación – UPS
-        </p>
-
-        <div class="w-40 h-1 bg-cyan-900 mx-auto my-4 rounded-full"></div>
-
-        <!-- SKILLS -->
-        <div class="flex flex-wrap justify-center gap-2">
-          <span class="badge badge-outline border-cyan-900">Angular</span>
-          <span class="badge badge-outline border-cyan-900">JavaScript</span>
-          <span class="badge badge-outline border-cyan-900">HTML</span>
-          <span class="badge badge-outline border-cyan-900">CSS</span>
-          <span class="badge badge-outline border-cyan-900">GitHub</span>
-        </div>
-
-        <div class="mt-6">
-          <a routerLink="/diana" class="btn btn-primary w-full">Ver Perfil</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- CARD SEBASTIÁN -->
-    <div class="card bg-white shadow-lg hover:shadow-2xl hover:-translate-y-2 
-                  duration-300 w-80 rounded-2xl border border-gray-200">
-
-      <figure class="p-4">
-        <img src="assets/sebascara.jpeg" class="h-56 w-full object-cover rounded-xl shadow-md" />
-      </figure>
-
-      <div class="card-body text-center">
-        <h2 class="text-2xl font-bold text-cyan-900">Sebastián Cabrera</h2>
-        <p class="font-medium text-gray-700">Desarrollador Web</p>
-
-        <p class="text-gray-500 text-sm mt-2">
-          Estudiante de Computación -- UPS
-        </p>
-
-        <div class="w-40 h-1 bg-cyan-900 mx-auto my-4 rounded-full"></div>
-
-        <!-- SKILLS -->
-        <div class="flex flex-wrap justify-center gap-2">
-          <span class="badge badge-outline border-cyan-900">Angular</span>
-          <span class="badge badge-outline border-cyan-900">HTML</span>
-          <span class="badge badge-outline border-cyan-900">CSS</span>
-          <span class="badge badge-outline border-cyan-900">GitHub</span>
-          <span class="badge badge-outline border-cyan-900">Bases de Datos</span>
-        </div>
-
-        <div class="mt-6">
-          <a routerLink="/sebas" class="btn btn-primary w-full">Ver Perfil</a>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ============================== -->
-<!-- SECCIÓN PROYECTOS DESTACADOS -->
-<!-- ============================== -->
-
-
-<section id="proyectos" class="scroll-mt-32 w-full py-24 bg-gray-100 mt-24">
-
-  <div class="max-w-6xl mx-auto px-8">
-
-    <!-- TÍTULO PRINCIPAL -->
-    <h2 class="text-5xl font-extrabold text-cyan-900 text-center mb-6 tracking-wide font-serif">
-      Nuestros Proyectos
-    </h2>
-
-    <p class="text-gray-600 text-lg text-center max-w-3xl mx-auto mb-16">
-      Presentamos una selección de proyectos desarrollados tanto de manera individual como colaborativa,
-      donde aplicamos principios de diseño, usabilidad, programación frontend y metodologías modernas
-      para la creación de soluciones web eficientes y bien estructuradas.
-    </p>
-
-    <!-- GRID DE PROYECTOS -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-
-      <!-- CARD Diana -->
-      <div
-        class="bg-white rounded-2xl border border-cyan-400 shadow-lg p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
-
-        <h3 class="text-xl font-bold text-cyan-800 mb-2">
-          Componentes y Estilos -- Angular
-        </h3>
-        <p class="text-sm opacity-70 mb-4">Realizado por Diana Avila 2025</p>
-
-        <p class="text-gray-700 leading-relaxed mb-6">
-          Demostracion de creación de componentes reutilizables y estilos globales en Angular.
-        </p>
-
-        <div class="flex justify-between mt-auto">
-          <a href="https://davilam3.github.io/icc-ppw-u3-03-ui-componentes-estilos/login" target="_blank"
-            class="px-4 py-2 bg-cyan-700 text-white rounded-xl shadow hover:bg-cyan-800 transition">
-            Ver proyecto
-          </a>
-
-          <a href="https://github.com/davilam3/icc-ppw-u3-03-ui-componentes-estilos.git" target="_blank"
-            class="hover:scale-110 transition">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" class="w-9 h-9" alt="GitHub">
+          <a [routerLink]="['/perfil', p.id]"
+             class="btn btn-primary w-full">
+            Ver Perfil
           </a>
         </div>
-
-      </div>
-
-
-      <!-- CARD SEBASTIAN -->
-      <div
-        class="bg-white rounded-2xl border border-cyan-400 shadow-lg p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
-
-        <h3 class="text-xl font-bold text-cyan-800 mb-2">
-          Heuristicas --Angular
-        </h3>
-        <p class="text-sm opacity-70 mb-4">Realizado por Sebastián Cabrera 2025</p>
-
-        <p class="text-gray-700 leading-relaxed mb-6">
-          Demostración de las 10 heurísticas de Nielsen en Angular con ejemplos malos y buenos de usabilidad.
-
-        </p>
-
-        <div class="flex justify-between mt-auto">
-          <a href="https://ccabreram1.github.io/icc-ppw-u2-02-ui-componentes/" target="_blank"
-            class="px-4 py-2 bg-cyan-700 text-white rounded-xl shadow hover:bg-cyan-800 transition">
-            Ver proyecto
-          </a>
-
-          <a href="https://github.com/Ccabreram1/icc-ppw-u2-02-ui-componentes.git" target="_blank"
-            class="hover:scale-110 transition">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" class="w-9 h-9" alt="GitHub">
-          </a>
-        </div>
-
-      </div>
-
-      <!-- CARD PROYECTO CONJUNTO -->
-      <div
-        class="bg-white rounded-2xl border border-cyan-400 shadow-lg p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
-
-        <h3 class="text-xl font-bold text-cyan-800 mb-2">
-          Portafolio Profesional — Angular
-        </h3>
-        <p class="text-sm opacity-70 mb-4">Realizado por Diana y Sebastian 2024</p>
-
-        <p class="text-gray-700 leading-relaxed mb-6">
-          Portafolio moderno, animado y optimizado para SEO con Tailwind + Angular.
-        </p>
-
-        <div class="flex justify-between mt-auto">
-          <a href="#" target="_blank"
-            class="px-4 py-2 bg-cyan-700 text-white rounded-xl shadow hover:bg-cyan-800 transition">
-            Ver proyecto
-          </a>
-
-          <a href="#" target="_blank" class="hover:scale-110 transition">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" class="w-9 h-9" alt="GitHub">
-          </a>
-        </div>
-
       </div>
 
     </div>
   </div>
 </section>
-
-
-<!-- ============================== -->
-<!-- SECCIÓN TRABAJA CON NOSOTROS-->
-<!-- ============================== -->
-
-<section id="trabaja" class="w-full py-20 bg-gray-50">
-  <div class="max-w-6xl mx-auto px-8">
-
-    <!-- TÍTULO PRINCIPAL -->
-    <h2 class="text-5xl font-extrabold text-cyan-900 text-center mb-6 tracking-wide font-serif">
-      ¡Trabaja con Nosotros!
-    </h2>
-
-    <p class="text-gray-600 text-lg text-center max-w-3xl mx-auto mb-12">
-      En <span class="font-bold">D&S | DevStudio</span> buscamos personas apasionadas por la tecnología y el desarrollo
-      web.
-      Si te gusta crear soluciones innovadoras, trabajar en equipo y aprender constantemente, este es el lugar para ti.
-      ¡Únete a nuestro equipo!
-    </p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-
-      <!-- POR QUÉ TRABAJAR CON NOSOTROS -->
-      <div
-        class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200">
-        <h3 class="text-3xl font-bold text-cyan-900 mb-4 text-center">Por qué trabajar con nosotros</h3>
-        <ul class="list-disc list-inside text-gray-700 space-y-2">
-          <li>Ambiente creativo y colaborativo.</li>
-          <li>Proyectos innovadores que desafían tus habilidades.</li>
-          <li>Oportunidades de aprendizaje y crecimiento profesional.</li>
-          <li>Flexibilidad y equilibrio entre trabajo y vida personal.</li>
-          <li>Formación continua y acceso a tecnologías modernas.</li>
-        </ul>
-      </div>
-
-      <!-- POR QUÉ CONTRATAR NUESTROS SERVICIOS -->
-      <div
-        class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200">
-        <h3 class="text-3xl font-bold text-cyan-900 mb-4 text-center">Por qué contratar nuestros servicios</h3>
-        <ul class="list-disc list-inside text-gray-700 space-y-2">
-          <li>Desarrollo web profesional y de alta calidad.</li>
-          <li>Soluciones personalizadas según tus necesidades.</li>
-          <li>Cumplimiento de plazos y comunicación clara.</li>
-          <li>Uso de tecnologías modernas y mejores prácticas.</li>
-          <li>Soporte y mantenimiento continuo.</li>
-        </ul>
-      </div>
-
-      <!-- BOTÓN CONTACTANOS -->
-      <div class="mt-8 flex mx-117 ">
-        <a routerLink="/contacto"
-          class="px-8 py-4 text-lg font-semibold bg-cyan-900 text-white rounded-xl shadow-md hover:bg-cyan-800 transition-all duration-300">
-          Contáctanos
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<app-footer></app-footer>

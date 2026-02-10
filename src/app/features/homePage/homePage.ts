@@ -1,32 +1,38 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
-import { Navbar } from "../../componentes/navbar/navbar";
-import { Footer } from "../../componentes/footer/footer";
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { RolesService } from '../../core/services/roles.service';
+import { UserService } from '../../core/services/user.service';
+
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [CommonModule, RouterLink, Footer],
+  imports: [CommonModule, RouterLink],
   templateUrl: './homePage.html',
   styleUrl: './homePage.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePage implements OnInit {
 
-  private rolesService = inject(RolesService); // Usamos RolesService para obtener programadores
+  private userService = inject(UserService);
+
   programadores: any[] = [];
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit() {
-    // Cargar programadores
-    this.rolesService.getAllProgrammers?.().subscribe((data: any) => {
-      this.programadores = data;
+  ngOnInit(): void {
+
+    // 🔹 Obtener programadores desde backend
+    this.userService.getAllProgrammers().subscribe({
+      next: (data) => {
+        this.programadores = data;
+      },
+      error: (err) => {
+        console.error('Error al obtener programadores', err);
+      }
     });
 
-    // Detectar fragmentos (#proyectos)
+    // 🔹 Scroll automático por fragmentos (#proyectos)
     this.route.fragment.subscribe(fragment => {
       if (fragment) {
         const element = document.getElementById(fragment);

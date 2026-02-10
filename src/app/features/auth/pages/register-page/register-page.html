@@ -1,114 +1,66 @@
-<div class="min-h-screen flex items-center justify-center bg-linear-to-br from-secondary to-accent p-4">
-    <div class="card w-full max-w-md bg-base-100 shadow-2xl">
-        <div class="card-body">
-            <!-- Header -->
-            <div class="text-center mb-6">
-                <h1 class="text-3xl font-bold text-secondary mb-2">Crear Cuenta</h1>
-                <p class="text-base-content/70">Regístrate para comenzar</p>
-            </div>
+<section class="min-h-screen flex items-center justify-center bg-gray-100">
 
-            <!-- Mensajes de error -->
-            @if (registerResource.error()) {
-            <div class="alert alert-error mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>{{ errorMessage() }}</span>
-            </div>
-            }
+    <div class="bg-white shadow-xl rounded-2xl p-10 w-full max-w-md">
 
-            <!-- Formulario -->
-            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-                <!-- Email -->
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text">Correo electrónico</span>
-                    </label>
-                    <input type="email" formControlName="email" placeholder="ejemplo@correo.com"
-                        class="input input-bordered w-full" [class.input-error]="email?.invalid && email?.touched" />
-                    @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
-                    <span
-                        class="block text-red-500 text-sm mt-1">{{formUtils.getFieldError(registerForm,'email')}}</span>
-                    }
+        <h2 class="text-3xl font-bold text-center text-cyan-900 mb-8">
+            Crear Cuenta
+        </h2>
 
-                </div>
-
-                <!-- Password -->
-                <div class="form-control mt-4">
-                    <label class="label">
-                        <span class="label-text">Contraseña</span>
-                    </label>
-                    <input type="password" formControlName="password" placeholder="••••••••"
-                        class="input input-bordered w-full"
-                        [class.input-error]="password?.invalid && password?.touched" />
-                    @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
-                    <span
-                        class="block text-red-500 text-sm mt-1">{{formUtils.getFieldError(registerForm,'password')}}</span>
-                    }
-
-
-                </div>
-
-                <!-- Confirm Password -->
-                <div class="form-control mt-4">
-                    <label class="label">
-                        <span class="label-text">Confirmar Contraseña</span>
-                    </label>
-                    <input type="password" formControlName="confirmPassword" placeholder="••••••••"
-                        class="input input-bordered w-full"
-                        [class.input-error]="confirmPassword?.invalid && confirmPassword?.touched" />
-                    @if (registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched) {
-                    <span
-                        class="block text-red-500 text-sm mt-1">{{formUtils.getFieldError(registerForm,'confirmPassword')}}</span>
-                    }
-
-
-                </div>
-
-                <!-- divider con google  -->
-                 
-                <div class="divider">O</div>
-
-                <button type="button" (click)="registerWithGoogle()" class="btn btn-outline w-full">
-                    <svg class="w-5 h-5" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                        <path fill="currentColor"
-                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                        <path fill="currentColor"
-                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                        <path fill="currentColor"
-                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                    </svg>
-                    Registrarse con Google
-                </button>
-
-
-                <!-- Botón Registro -->
-                <div class="form-control mt-6">
-                    <button type="submit" class="btn btn-secondary w-full"
-                        [disabled]="loading() || registerForm.invalid">
-                        @if (loading()) {
-                        <span class="loading loading-spinner loading-sm"></span>
-                        Creando cuenta...
-                        } @else {
-                        Crear Cuenta
-                        }
-                    </button>
-                </div>
-            </form>
-
-            <!-- Link a Login -->
-            <div class="text-center mt-4">
-                <p class="text-sm text-base-content/70">
-                    ¿Ya tienes cuenta?
-                    <a routerLink="/auth/login" routerLink="/auth/login" class="link link-secondary font-semibold">
-                        Inicia sesión aquí
-                    </a>
-                </p>
-            </div>
+        <!-- ERROR -->
+        <div *ngIf="errorMessage" class="bg-red-100 text-red-600 p-3 rounded-lg mb-4 text-sm text-center">
+            {{ errorMessage }}
         </div>
+
+        <!-- SUCCESS -->
+        <div *ngIf="successMessage" class="bg-green-100 text-green-600 p-3 rounded-lg mb-4 text-sm text-center">
+            {{ successMessage }}
+        </div>
+
+        <!-- NOMBRE -->
+        <div class="mb-5">
+            <label class="block mb-2 font-semibold text-gray-700">
+                Nombre
+            </label>
+            <input type="text" [(ngModel)]="name"
+                class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-cyan-700"
+                placeholder="Tu nombre completo">
+        </div>
+
+        <!-- EMAIL -->
+        <div class="mb-5">
+            <label class="block mb-2 font-semibold text-gray-700">
+                Correo electrónico
+            </label>
+            <input type="email" [(ngModel)]="email"
+                class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-cyan-700"
+                placeholder="ejemplo@email.com">
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="mb-6">
+            <label class="block mb-2 font-semibold text-gray-700">
+                Contraseña
+            </label>
+            <input type="password" [(ngModel)]="password"
+                class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-cyan-700" placeholder="********">
+        </div>
+
+        <!-- BOTÓN -->
+        <button (click)="register()" [disabled]="loading"
+            class="w-full bg-cyan-900 text-white py-3 rounded-lg font-semibold hover:bg-cyan-800 transition">
+
+            <span *ngIf="!loading">Registrarse</span>
+            <span *ngIf="loading">Creando...</span>
+
+        </button>
+
+        <p class="text-center mt-6 text-sm">
+            ¿Ya tienes cuenta?
+            <a routerLink="/login" class="text-cyan-900 font-semibold hover:underline">
+                Inicia sesión
+            </a>
+        </p>
+
     </div>
-</div>
+
+</section>

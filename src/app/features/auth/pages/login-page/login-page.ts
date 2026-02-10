@@ -1,117 +1,55 @@
-import { Component, effect, inject, signal } from '@angular/core';
-import { Router, RouterLink, RouterModule } from '@angular/router';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { from, Observable, of } from 'rxjs';
-import { rxResource } from '@angular/core/rxjs-interop';
-import { AuthService } from '../../../../core/services/firebase/auth';
-import { formUtils } from '../../../../core/services/Utils/formUtils';
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
-import { Footer } from "../../../../componentes/footer/footer";
-import { GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
-
-
-
 
 @Component({
   selector: 'app-login-page',
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
-  templateUrl: './login-page.html',
-  styleUrl: './login-page.css',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './login-page.html'
 })
 export class LoginPage {
 
+  email: string = '';
+  password: string = '';
+  loading = false;
+  errorMessage = '';
 
-  private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  loginForm: FormGroup;
+  login() {
 
-  // Signal para disparar el login
-  private loginTrigger = signal<{ email: string; password: string } | null>(null);
-
-  // rxResource para manejar el proceso de login (Angular 20+)
-  loginResource = rxResource({
-    params: () => this.loginTrigger(),
-    stream: ({ params }) => {
-      if (!params) return of(null);
-      return this.authService.login(params.email, params.password);
-    }
-  });
-
-  formUtils = formUtils;
-  // formUtils = FormUtils;
-
-  constructor() {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
-
-    // Effect para navegar cuando el login sea exitoso
-    effect(() => {
-      if (this.loginResource.hasValue() && this.loginResource.value()) {
-        console.log('Login exitoso, navegando a /inicio');
-        this.router.navigate(['/inicio']);
-      }
-    });
-  }
-
-  onSubmit() {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
+    if (!this.email || !this.password) {
+      this.errorMessage = 'Todos los campos son obligatorios';
       return;
     }
 
-    const { email, password } = this.loginForm.value;
+    this.loading = true;
+    this.errorMessage = '';
 
-    // Disparar el login actualizando el signal
-    this.loginTrigger.set({ email, password });
-  }
-
-  loginWithGoogle() {
-    this.authService.loginWithGoogle().subscribe({
+    this.authService.login(this.email, this.password).subscribe({
       next: () => {
-        this.router.navigate(['/inicio']);
+
+        const role = this.authService.getUserRole();
+
+        if (role === 'ROLE_ADMIN') {
+          this.router.navigate(['/panel-admin']);
+        }
+        else if (role === 'ROLE_PROGRAMMER') {
+          this.router.navigate(['/mi-portafolio']);
+        }
+        else {
+          this.router.navigate(['/']);
+        }
+
       },
-      error: (err: unknown) => {
-        console.error('Error al iniciar sesión con Google:', err);
+      error: () => {
+        this.errorMessage = 'Credenciales incorrectas';
+        this.loading = false;
       }
     });
   }
-
-  // Computed signal para el estado de carga
-  loading = this.loginResource.isLoading;
-
-  // Computed signal para el mensaje de error
-  errorMessage = () => {
-    const error = this.loginResource.error();
-    if (!error) return '';
-
-    const code = (error as any).code || '';
-    const errorMessages: { [key: string]: string } = {
-      'auth/invalid-email': 'El correo electrónico no es válido',
-      'auth/user-disabled': 'El usuario ha sido deshabilitado',
-      'auth/user-not-found': 'No existe un usuario con este correo',
-      'auth/wrong-password': 'Contraseña incorrecta',
-      'auth/invalid-credential': 'Credenciales inválidas'
-    };  
-    return errorMessages[code] || 'Error al iniciar sesión';
-  }
-
-  // Getters para validación en el template
-  get email() {
-    return this.loginForm.get('email');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
-  }
-
-  // onSubmit() {
-  //   const { email, password } = this.loginForm.value;
-  //   this.loginTrigger.set({ email, password });
-  // }
-
-
 }

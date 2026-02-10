@@ -41,19 +41,21 @@
 
       <!-- Opciones según rol -->
       @if (isAuthenticated()) {
-        @if (esAdmin()) {
-        <a routerLink="/panel-admin" class="font-bold text-yellow-300 hover:text-white transition">
-          ⚙️ Panel Admin
-        </a>
-        } @else if (esProgramador()) {
-        <a routerLink="/mi-portafolio" class="font-bold text-green-300 hover:text-white transition">
-          📁 Mi Portafolio
-        </a>
-        <a routerLink="/mis-asesorias" class="font-bold text-blue-300 hover:text-white transition">
-          📅 Mis Asesorías
-        </a>
-        }
+      @if (esAdmin()) {
+      <a routerLink="/admin" class="font-bold text-yellow-300 hover:text-white transition">
+        ⚙️ Panel Admin
+      </a>
       }
+      @else if (esProgramador()) {
+      <a routerLink="/programmer" class="font-bold text-green-300 hover:text-white transition">
+        📁 Mi Portafolio
+      </a>
+      <a routerLink="/mis-asesorias" class="font-bold text-blue-300 hover:text-white transition">
+        📅 Mis Asesorías
+      </a>
+      }
+      }
+
 
       <!-- Área de usuario/login -->
       @if (!isAuthenticated()) {
@@ -61,6 +63,11 @@
         class="px-4 py-2 rounded-md bg-white text-cyan-900 font-semibold shadow hover:bg-cyan-100 transition">
         Iniciar Sesión
       </button>
+
+      <button (click)="navigateToRegister()" class="hover:text-cyan-300 transition">
+        Registrarse
+      </button>
+
       }
 
       @if (isAuthenticated() && currentUser()) {
@@ -87,7 +94,8 @@
           <div class="divider my-0"></div>
           <li>
             <button (click)="logout()" class="btn btn-error btn-sm w-full text-left flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
               </svg>

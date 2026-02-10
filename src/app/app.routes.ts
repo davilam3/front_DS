@@ -1,70 +1,59 @@
 import { Routes } from '@angular/router';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { HomePage } from './features/homePage/homePage';
-import { PerfilPageDiana } from './features/perfilPageDiana/perfilPageDiana';
-import { PerfilPageSebas } from './features/perfilPageSebas/perfilPageSebas';
-import { publicGuard } from './core/guards/public-guard';
+import { authGuard } from './core/guards/ auth.guard';
+import { roleGuard } from './core/guards/role.guard';
 
 export const routes: Routes = [
 
+  {
+    path: '',
+    loadComponent: () =>
+      import('./features/homePage/homePage')
+        .then(m => m.HomePage)
+  },
 
-    {
-        path: '',
-        redirectTo: 'inicio',
-        pathMatch: 'full'
-    },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./features/auth/pages/login-page/login-page')
+        .then(m => m.LoginPage)
+  },
 
-    {
-        path: 'login',
-        loadComponent: () =>
-            import('./features/auth/pages/login-page/login-page').then(m => m.LoginPage),
-        //canActivate: [publicGuard]
-    },
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./features/auth/pages/register-page/register-page')
+        .then(m => m.RegisterPage)
+  },
 
-    {
-        path: 'register',
-        loadComponent: () =>
-            import('./features/auth/pages/register-page/register-page').then(m => m.RegisterPage),
-        canActivate: [publicGuard]
-    },
-    {
-        path: 'inicio',
-        loadComponent: () =>
-            import('./features/homePage/homePage').then(m => m.HomePage),
-    },
-    {
-        path: 'contacto',
-        loadComponent: () =>
-            import('./features/contacto/contacto').then(m => m.Contacto),
-    },
+  {
+    path: 'perfil/:id',
+    loadComponent: () =>
+      import('./features/dashboard/perfil/perfil')
+        .then(m => m.Perfil),
+  },
 
-    {
-        path: 'diana',
-        loadComponent: () =>
-            import('./features/perfilPageDiana/perfilPageDiana').then(m => m.PerfilPageDiana),
-    },
+  {
+    path: 'admin',
+    canActivate: [authGuard, roleGuard],
+    data: { role: 'ROLE_ADMIN' },
+    loadComponent: () =>
+      import('./features/admin-panel/admin-panel')
+        .then(m => m.AdminPanel)
+  },
 
-    {
-        path: 'panel-admin',
-        loadComponent: () => import('./features/admin-panel/admin-panel').then(m => m.AdminPanel)
-    },
-    {
-        path: 'mi-portafolio',
-        loadComponent: () => import('./features/programador-panel/programador-panel').then(m => m.ProgramadorPanel)
-    },
-    {
-        path: 'mis-asesorias',
-        loadComponent: () => import('./features/programador-asesorias/programador-asesorias').then(m => m.ProgramadorAsesorias)
-    },
+  {
+    path: 'programmer',
+    canActivate: [authGuard, roleGuard],
+    data: { role: 'ROLE_PROGRAMMER' },
+    loadComponent: () =>
+      import('./features/programador-panel/programador-panel')
+        .then(m => m.ProgramadorPanel)
+  },
 
-    {
-        path: 'sebas',
-        loadComponent: () =>
-            import('./features/perfilPageSebas/perfilPageSebas').then(m => m.PerfilPageSebas),
-    },
+  {
+    path: '**',
+    redirectTo: ''
+  }
 
-    {
-        path: '**',
-        redirectTo: 'inicio'
-    }
 ];
+

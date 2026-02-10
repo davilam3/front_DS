@@ -47,12 +47,3 @@ export interface Administrador extends Usuario {
   permiso_eliminar_usuarios?: boolean;
   permiso_gestionar_contenido?: boolean;
 }
-
-/**
- * Interface para Usuarios externos
- */
-export interface UsuarioExterno extends Usuario {
-  rol: 'usuario';
-  intereses?: string[];
-  solicitudes?: string[];         // IDs de solicitudes realizadas
-}
