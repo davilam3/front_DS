@@ -1,3 +1,70 @@
+FRONTEND/
+├── .angular/
+├── .vscode/
+├── node_modules/
+├── public/
+│   └── index.html
+├── src/
+│   ├── app/
+│   │   ├── components/
+│   │   │   ├── back-to-top/
+│   │   │   │   ├── back-to-top.html
+│   │   │   │   └── back-to-top.ts
+│   │   │   ├── footer/
+│   │   │   │   ├── footer.css
+│   │   │   │   ├── footer.html
+│   │   │   │   └── footer.ts
+│   │   │   └── navbar/
+│   │   │       ├── navbar.html
+│   │   │       └── navbar.ts
+│   │   ├── core/
+│   │   │   ├── guards/
+│   │   │   │   ├── auth.guard.ts
+│   │   │   │   └── role.guard.ts
+│   │   │   ├── interceptors/
+│   │   │   │   └── auth.interceptor.ts
+│   │   │   ├── models/
+│   │   │   │   ├── advisory.model.ts
+│   │   │   │   ├── project.model.ts
+│   │   │   │   └── user.model.ts
+│   │   │   └── services/
+│   │   │       ├── advisory.service.ts
+│   │   │       ├── auth.service.ts
+│   │   │       ├── project.service.ts
+│   │   │       └── user.service.ts
+│   │   ├── features/
+│   │   │   ├── admin-panel/
+│   │   │   │   ├── admin-panel.html
+│   │   │   │   └── admin-panel.ts
+│   │   │   ├── auth/
+│   │   │   │   ├── login-page/
+│   │   │   │   │   ├── login-page.html
+│   │   │   │   │   └── login-page.ts
+│   │   │   │   └── register-page/
+│   │   │   │       ├── register-page.html
+│   │   │   │       └── register-page.ts
+│   │   │   ├── dashboard/
+│   │   │   │   └── perfil/
+│   │   │   │       ├── perfil.html
+│   │   │   │       └── perfil.ts
+│   │   │   ├── homePage/
+│   │   │   │   ├── homePage.css
+│   │   │   │   ├── homePage.html
+│   │   │   │   └── homePage.ts
+│   │   │   └── programador-panel/
+│   │   │       ├── programador-panel.html
+│   │   │       └── programador-panel.ts
+│   │   ├── environments/
+│   │   │   ├── environment.prod.ts
+│   │   │   └── environment.ts
+│   │   ├── app.config.ts
+│   │   ├── app.css
+│   │   ├── app.html
+│   │   ├── app.routes.ts
+│   │   ├── app.spec.ts
+│   │   └── app.ts
+│   └── main.ts
+
 ![logo ups](./public/assets/upslogo.png)
 
 <div style="display: flex; align-items: center; gap: 16px;"> <img src="./public/assets/logo.jpg" width="80" alt="D&S Logo"> <h1 style="margin:0; padding:0;">Proyecto Portafolio D&S | Dev Studio</h1> </div>

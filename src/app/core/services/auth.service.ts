@@ -7,6 +7,8 @@ import { tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+
+
   register(name: string, email: string, password: string) {
     return this.http.post<any>(`${this.apiUrl}/register`, {
       name,
@@ -14,10 +16,8 @@ export class AuthService {
       password
     });
   }
-
-
   private http = inject(HttpClient);
-  private apiUrl = environment.apiUrl + '/api/auth';
+  private apiUrl = 'https://dc-plataform.onrender.com/api';
 
   login(email: string, password: string) {
     return this.http.post<any>(`${this.apiUrl}/login`, { email, password })
@@ -45,8 +45,15 @@ export class AuthService {
     if (!token) return null;
 
     const payload = JSON.parse(atob(token.split('.')[1]));
-    return payload.role || payload.roles?.[0];
+
+    // roles viene como string: "ROLE_ADMIN,ROLE_USER"
+    if (payload.roles) {
+      return payload.roles.split(',')[0];
+    }
+
+    return null;
   }
+
 
   getCurrentUser(): any | null {
     const token = this.getToken();

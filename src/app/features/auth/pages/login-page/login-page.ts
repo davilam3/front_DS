@@ -32,20 +32,19 @@ export class LoginPage {
 
     this.authService.login(this.email, this.password).subscribe({
       next: () => {
+        this.loading = false;
 
         const role = this.authService.getUserRole();
 
         if (role === 'ROLE_ADMIN') {
-          this.router.navigate(['/panel-admin']);
-        }
-        else if (role === 'ROLE_PROGRAMMER') {
-          this.router.navigate(['/mi-portafolio']);
-        }
-        else {
+          this.router.navigate(['/admin']);
+        } else if (role === 'ROLE_PROGRAMMER') {
+          this.router.navigate(['/programmer']);
+        } else {
           this.router.navigate(['/']);
         }
-
       },
+
       error: () => {
         this.errorMessage = 'Credenciales incorrectas';
         this.loading = false;
