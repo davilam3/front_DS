@@ -1,0 +1,30 @@
+<h1 class="text-3xl font-bold mb-6 text-cyan-900">
+  Gestión de Programadores
+</h1>
+
+<!-- BOTÓN AGREGAR -->
+<button
+  class="btn btn-primary mb-6"
+  (click)="agregarProgramador()">
+  ➕ Agregar Programador
+</button>
+
+<!-- FORMULARIO -->
+<app-programmer-form
+  *ngIf="mostrarFormulario"
+  [programador]="programadorEnEdicion"
+  (guardar)="guardarProgramador($event)"
+  (cancelar)="cancelarFormulario()">
+</app-programmer-form>
+
+<!-- GRID DE CARDS -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+
+  <app-programmer-card
+    *ngFor="let p of programadores"
+    [programador]="p"
+    (editar)="editarProgramador($event)"
+    (eliminar)="eliminarProgramador($event)">
+  </app-programmer-card>
+
+</div>

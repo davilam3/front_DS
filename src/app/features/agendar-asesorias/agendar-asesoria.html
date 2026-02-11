@@ -1,0 +1,86 @@
+<section class="max-w-3xl mx-auto mt-32 px-6">
+
+  <h1 class="text-4xl font-bold text-cyan-900 mb-8 text-center">
+    📅 Agendar Asesoría
+  </h1>
+
+  <div class="bg-white rounded-3xl shadow-xl p-8 border border-cyan-500">
+
+    <!-- PROGRAMADOR -->
+    <div class="mb-6">
+      <label class="font-semibold block mb-2">
+        Programador
+      </label>
+
+      <select
+        [(ngModel)]="programmerId"
+        class="select select-bordered w-full">
+        <option [ngValue]="null">Seleccione un programador</option>
+        <option *ngFor="let p of programadores" [ngValue]="p.id">
+          {{ p.nombre }} — {{ p.especialidad }}
+        </option>
+      </select>
+    </div>
+
+    <!-- FECHA -->
+    <div class="mb-6">
+      <label class="font-semibold block mb-2">
+        Fecha
+      </label>
+
+      <input
+        type="date"
+        [(ngModel)]="fecha"
+        class="input input-bordered w-full" />
+    </div>
+
+    <!-- HORARIO -->
+    <div class="mb-6">
+      <label class="font-semibold block mb-2">
+        Horario
+      </label>
+
+      <select
+        [(ngModel)]="horario"
+        class="select select-bordered w-full">
+        <option value="">Seleccione un horario</option>
+        <option *ngFor="let h of horariosDisponibles" [value]="h">
+          {{ h }}
+        </option>
+      </select>
+    </div>
+
+    <!-- MENSAJE -->
+    <div class="mb-8">
+      <label class="font-semibold block mb-2">
+        Mensaje (opcional)
+      </label>
+
+      <textarea
+        rows="4"
+        [(ngModel)]="mensaje"
+        class="textarea textarea-bordered w-full"
+        placeholder="Describe brevemente tu necesidad">
+      </textarea>
+    </div>
+
+    <!-- BOTONES -->
+    <div class="flex justify-end gap-4">
+
+      <button
+        class="btn btn-outline"
+        (click)="cancelar()">
+        Cancelar
+      </button>
+
+      <button
+        class="btn btn-primary"
+        (click)="enviarSolicitud()">
+        Enviar Solicitud
+      </button>
+
+    </div>
+
+  </div>
+
+</section>

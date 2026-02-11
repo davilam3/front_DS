@@ -31,25 +31,16 @@ export class LoginPage {
     this.errorMessage = '';
 
     this.authService.login(this.email, this.password).subscribe({
-      next: () => {
+      next: (res) => {
+        console.log('LOGIN RESPONSE:', res);
         this.loading = false;
-
-        const roles = this.authService.getUserRole();
-
-        if (roles.includes('ROLE_ADMIN')) {
-          this.router.navigate(['/admin']);
-        } else if (roles.includes('ROLE_PROGRAMMER')) {
-          this.router.navigate(['/programmer']);
-        } else {
-          this.router.navigate(['/']);
-        }
-
       },
-
-      error: () => {
+      error: (err) => {
+        console.error('LOGIN ERROR:', err);
         this.errorMessage = 'Credenciales incorrectas';
         this.loading = false;
       }
     });
+
   }
 }

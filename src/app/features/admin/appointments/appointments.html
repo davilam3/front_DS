@@ -1,0 +1,70 @@
+<section class="flex flex-col gap-6">
+
+  <h1 class="text-3xl font-bold text-cyan-900">
+    Gestión de Asesorías
+  </h1>
+
+  <!-- FILTROS -->
+  <div class="flex flex-wrap gap-4">
+    <button
+      class="btn btn-outline"
+      [class.btn-primary]="filtro === 'ALL'"
+      (click)="cambiarFiltro('ALL')">
+      Todas
+    </button>
+
+    <button
+      class="btn btn-outline"
+      [class.btn-primary]="filtro === 'USERS'"
+      (click)="cambiarFiltro('USERS')">
+      Usuarios
+    </button>
+
+    <button
+      class="btn btn-outline"
+      [class.btn-primary]="filtro === 'PROGRAMMERS'"
+      (click)="cambiarFiltro('PROGRAMMERS')">
+      Programadores
+    </button>
+  </div>
+
+  <!-- TABLA -->
+  <div class="card bg-white shadow-xl p-6 overflow-x-auto">
+
+    <table class="table w-full min-w-[900px]">
+      <thead>
+        <tr>
+          <th>Usuario</th>
+          <th>Programador</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Mensaje</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let a of appointmentsFiltradas">
+          <td>{{ a.usuario }}</td>
+          <td>{{ a.programador }}</td>
+          <td>{{ a.fecha }}</td>
+          <td>{{ a.hora }}</td>
+          <td class="max-w-xs truncate">{{ a.mensaje }}</td>
+          <td>
+            <span class="badge" [ngClass]="badgeEstado(a.estado)">
+              {{ a.estado }}
+            </span>
+          </td>
+        </tr>
+
+        <tr *ngIf="appointmentsFiltradas.length === 0">
+          <td colspan="6" class="text-center text-gray-500">
+            No hay asesorías registradas
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</section>

@@ -20,22 +20,33 @@
         class="relative after:block after:h-0.5 after:w-0 after:bg-cyan-950 after:transition-all after:duration-300 hover:after:w-full">
         Inicio
       </a>
-      <a href="#" (click)="scrollToPerfiles($event)"
-        class="relative after:block after:h-0.5 after:w-0 after:bg-cyan-950 after:transition-all after:duration-300 hover:after:w-full">
+      <a (click)="scrollTo('equipo')"
+        class="relative cursor-pointer after:block after:h-0.5 after:w-0 after:bg-cyan-950 after:transition-all after:duration-300 hover:after:w-full">
         Equipo
       </a>
-      <a href="#" (click)="scrollToProjects($event)"
-        class="relative after:block after:h-0.5 after:w-0 after:bg-cyan-950 after:transition-all after:duration-300 hover:after:w-full">
+
+      <a (click)="scrollTo('proyectos')"
+        class="relative cursor-pointer after:block after:h-0.5 after:w-0 after:bg-cyan-950 after:transition-all after:duration-300 hover:after:w-full">
         Proyectos
       </a>
-      <a routerLink="/contacto"
+
+      <!-- <a routerLink="/contacto"
         class="relative after:block after:h-0.5 after:w-0 after:bg-cyan-950 after:transition-all after:duration-300 hover:after:w-full">
         Contacto
-      </a>
+      </a> -->
     </div>
 
     <!-- BOTONES Y OPCIONES DE USUARIO -->
     <div class="flex items-center gap-4">
+
+      <!-- BOTÓN AGENDAR ASESORÍA (USUARIO AUTENTICADO) -->
+      @if (isAuthenticated() && !esAdmin() && !esProgramador()) {
+      <a routerLink="/asesorias/nueva/:programmerId" class="px-4 py-2 rounded-md bg-cyan-700 text-white font-semibold shadow
+           hover:bg-cyan-600 transition flex items-center gap-2">
+
+        📅 Agendar Asesoría
+      </a>
+      }
 
       <!-- (Agendar Asesoría eliminado) El contacto ya está disponible en 'Contacto' -->
 

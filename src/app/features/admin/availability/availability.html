@@ -1,0 +1,95 @@
+<section class="flex flex-col gap-8">
+
+  <h1 class="text-3xl font-bold text-cyan-900">
+    Gestión de Disponibilidad
+  </h1>
+
+  <!-- FORMULARIO -->
+  <div class="card bg-white shadow-xl p-6 border border-cyan-500 max-w-xl">
+
+    <div class="flex flex-col gap-4">
+
+      <!-- PROGRAMADOR -->
+      <div>
+        <label class="font-semibold block mb-2">
+          Programador
+        </label>
+        <select
+          [(ngModel)]="programadorId"
+          class="select select-bordered w-full">
+          <option [ngValue]="null">Seleccione un programador</option>
+          <option *ngFor="let p of programadores" [ngValue]="p.id">
+            {{ p.nombre }}
+          </option>
+        </select>
+      </div>
+
+      <!-- FECHA -->
+      <div>
+        <label class="font-semibold block mb-2">
+          Fecha
+        </label>
+        <input
+          type="date"
+          [(ngModel)]="fecha"
+          class="input input-bordered w-full" />
+      </div>
+
+      <!-- HORA -->
+      <div>
+        <label class="font-semibold block mb-2">
+          Hora
+        </label>
+        <select
+          [(ngModel)]="hora"
+          class="select select-bordered w-full">
+          <option value="">Seleccione una hora</option>
+          <option *ngFor="let h of horarios" [value]="h">
+            {{ h }}
+          </option>
+        </select>
+      </div>
+
+      <button
+        class="btn btn-primary w-full"
+        (click)="guardarDisponibilidad()">
+        Guardar Disponibilidad
+      </button>
+
+    </div>
+  </div>
+
+  <!-- LISTADO -->
+  <div class="card bg-white shadow p-6 overflow-x-auto">
+
+    <h2 class="text-xl font-bold mb-4">
+      Disponibilidades creadas
+    </h2>
+
+    <table class="table w-full min-w-[600px]">
+      <thead>
+        <tr>
+          <th>Programador</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let d of disponibilidades">
+          <td>{{ d.programador }}</td>
+          <td>{{ d.fecha }}</td>
+          <td>{{ d.hora }}</td>
+        </tr>
+
+        <tr *ngIf="disponibilidades.length === 0">
+          <td colspan="3" class="text-center text-gray-500">
+            No hay disponibilidades registradas
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</section>

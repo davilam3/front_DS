@@ -11,16 +11,23 @@ export class AuthService {
   private http = inject(HttpClient);
   private apiUrl = environment.apiUrl + '/api/auth';
 
-  login(email: string, password: string) {
-    return this.http.post<any>(`${this.apiUrl}/login`, { email, password })
-      .pipe(
-        tap(response => {
-          if (response?.token) {
-            localStorage.setItem('token', response.token);
-          }
-        })
-      );
-  }
+login(email: string, password: string) {
+  return this.http.post<any>(`${this.apiUrl}/login`, { email, password })
+    .pipe(
+      tap(response => {
+        const token =
+          response.token ||
+          response.accessToken ||
+          response.jwt;
+
+        if (!token) {
+          throw new Error('Token no recibido del backend');
+        }
+
+        localStorage.setItem('token', token);
+      })
+    );
+}
 
 
   register(name: string, email: string, password: string) {
@@ -56,26 +63,16 @@ export class AuthService {
     }
   }
 
-  getUserRole(): string[] {
-    const user = this.getCurrentUser();
-    if (!user) return [];
+ getUserRoles(): string[] {
+  const user = this.getCurrentUser();
+  if (!user) return [];
 
-    // Caso 1: roles como array
-    if (Array.isArray(user.roles)) {
-      return user.roles;
-    }
+  return user.roles || user.authorities || [];
+}
 
-    // Caso 2: authorities como array (Spring Security estándar)
-    if (Array.isArray(user.authorities)) {
-      return user.authorities;
-    }
+hasRole(role: string): boolean {
+  return this.getUserRoles().includes(role);
+}
 
-    // Caso 3: roles como string
-    if (typeof user.roles === 'string') {
-      return user.roles.split(',');
-    }
-
-    return [];
-  }
 
 }

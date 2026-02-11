@@ -22,12 +22,22 @@ export class AdvisoryService {
     return this.http.post(this.apiUrl, advisory);
   }
 
-  approve(id: number, message: string) {
-    return this.http.put(`${this.apiUrl}/${id}/approve`, { message });
+  approve(id: number) {
+    return this.http.put(`${this.apiUrl}/${id}/accept`, {});
   }
 
-  reject(id: number, message: string) {
-    return this.http.put(`${this.apiUrl}/${id}/reject`, { message });
+  reject(id: number) {
+    return this.http.put(`${this.apiUrl}/${id}/reject`, {});
   }
+
+
+  getMineAsUser() {
+    return this.http.get<any[]>(`${this.apiUrl}/user`);
+  }
+
+  getMineAsProgrammer() {
+    return this.http.get<any[]>(`${this.apiUrl}/programmer`);
+  }
+
 }
 

@@ -1,49 +1,20 @@
-/**
- * Interface para usuarios del sistema
- * Define la estructura de datos de cada usuario en Firestore
- */
+
 export interface Usuario {
-  uid: string;                    // ID único de Firebase Auth
-  email: string;                  // Correo electrónico
-  nombre: string;                 // Nombre completo
-  rol: 'admin' | 'programador' | 'usuario'; // Tipo de usuario
-  fotoPerfil?: string;            // URL de la foto
-  fechaRegistro: Date;            // Fecha de creación
-  activo: boolean;                // Estado del usuario
+  id: number;
+  name: string;
+  email: string;
+  roles: string[];
+  enabled: boolean;
 }
 
-/**
- * Interface para programadores
- * Extiende la información básica de usuario con datos profesionales
- */
-export interface Programador extends Usuario {
-  rol: 'programador';
-  especialidad: string;           // Ej: "Frontend", "Backend", "Full Stack"
-  descripcion: string;            // Breve descripción profesional
-  fotoPerfil: string;             // Foto de perfil (requerida)
-  contacto: {
-    telefono?: string;
-    whatsapp?: string;
-    email: string;
-  };
-  redesSociales: {
-    github?: string;
-    linkedin?: string;
-    twitter?: string;
-    instagram?: string;
-    portfolio?: string;
-  };
-  habilidades: string[];          // Array de tecnologías/habilidades
-  proyectos: string[];            // IDs de proyectos asociados
-}
 
-/**
- * Interface para Administradores
- */
-export interface Administrador extends Usuario {
-  rol: 'admin';
-  permiso_crear_usuarios?: boolean;
-  permiso_editar_usuarios?: boolean;
-  permiso_eliminar_usuarios?: boolean;
-  permiso_gestionar_contenido?: boolean;
+export interface Portfolio {
+  id: number;
+  userId: number;
+  fullName: string;
+  speciality: string;
+  description: string;
+  skills: string[];
+  imageUrl?: string;
+  githubUrl?: string;
 }

@@ -14,18 +14,17 @@ export class Navbar {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  // 🔐 AUTENTICACIÓN
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
   }
 
- esAdmin(): boolean {
-  return this.authService.getUserRole().includes('ROLE_ADMIN');
-}
+  esAdmin(): boolean {
+    return this.authService.hasRole('ROLE_ADMIN');
+  }
 
-esProgramador(): boolean {
-  return this.authService.getUserRole().includes('ROLE_PROGRAMMER');
-}
+  esProgramador(): boolean {
+    return this.authService.hasRole('ROLE_PROGRAMMER');
+  }
 
   logout(): void {
     this.authService.logout();
@@ -49,27 +48,41 @@ esProgramador(): boolean {
     }
   }
 
- userRole(): string {
-  const roles = this.authService.getUserRole();
+  userRole(): string {
+    const roles = this.authService.getUserRoles();
 
-  if (roles.includes('ROLE_ADMIN')) return 'admin';
-  if (roles.includes('ROLE_PROGRAMMER')) return 'programador';
-  return 'user';
-}
+    if (roles.includes('ROLE_ADMIN')) return 'admin';
+    if (roles.includes('ROLE_PROGRAMMER')) return 'programador';
+    return 'user';
+  }
 
   goHome(event: Event): void {
     event.preventDefault();
     this.router.navigate(['/']);
   }
 
-  scrollToPerfiles(event: Event): void {
-    event.preventDefault();
-    document.getElementById('perfiles')?.scrollIntoView({ behavior: 'smooth' });
+  scrollTo(sectionId: string) {
+
+    // Si NO estamos en el home, navegar primero
+    if (this.router.url !== '/') {
+      this.router.navigate(['/']).then(() => {
+        setTimeout(() => {
+          this.scroll(sectionId);
+        }, 100);
+      });
+    } else {
+      this.scroll(sectionId);
+    }
   }
 
-  scrollToProjects(event: Event): void {
-    event.preventDefault();
-    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+  private scroll(sectionId: string) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   }
 
   navigateToRegister() {

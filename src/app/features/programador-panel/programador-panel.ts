@@ -74,22 +74,18 @@ export class ProgramadorPanel {
   // ==========================
 
   loadAsesorias() {
-    this.advisoryService.getAll()
-      .subscribe(data => {
-        this.asesorias = data.filter(
-          (a: any) => a.programmerId === this.userId
-        );
-      });
+    this.advisoryService.getMineAsProgrammer()
+      .subscribe(data => this.asesorias = data);
   }
 
   responderAsesoria(id: number, estado: 'approve' | 'reject') {
     const message = prompt('Mensaje (opcional):') || '';
 
     if (estado === 'approve') {
-      this.advisoryService.approve(id, message)
+      this.advisoryService.approve(id)
         .subscribe(() => this.loadAsesorias());
     } else {
-      this.advisoryService.reject(id, message)
+      this.advisoryService.reject(id)
         .subscribe(() => this.loadAsesorias());
     }
   }

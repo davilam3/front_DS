@@ -1,0 +1,164 @@
+<h1 class="text-3xl font-bold mb-8 text-cyan-900">
+  Editar Perfil Profesional
+</h1>
+
+<div class="bg-white rounded-3xl shadow-xl p-8 border border-cyan-500">
+
+  <!-- ============================= -->
+  <!-- DATOS PERSONALES -->
+  <!-- ============================= -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+
+    <div>
+      <label class="font-semibold block mb-2">Nombre completo</label>
+      <input
+        type="text"
+        [(ngModel)]="perfil.nombre"
+        class="input input-bordered w-full"
+        placeholder="Nombre completo" />
+    </div>
+
+    <div>
+      <label class="font-semibold block mb-2">Especialidad</label>
+      <input
+        type="text"
+        [(ngModel)]="perfil.especialidad"
+        class="input input-bordered w-full"
+        placeholder="Frontend Developer" />
+    </div>
+
+    <div>
+      <label class="font-semibold block mb-2">Correo empresarial</label>
+      <input
+        type="email"
+        [(ngModel)]="perfil.correoEmpresarial"
+        class="input input-bordered w-full"
+        placeholder="empresa@correo.com" />
+    </div>
+
+    <div>
+      <label class="font-semibold block mb-2">Correo personal</label>
+      <input
+        type="email"
+        [(ngModel)]="perfil.correoPersonal"
+        class="input input-bordered w-full"
+        placeholder="personal@gmail.com" />
+    </div>
+
+    <div>
+      <label class="font-semibold block mb-2">Teléfono</label>
+      <input
+        type="text"
+        [(ngModel)]="perfil.telefono"
+        class="input input-bordered w-full"
+        placeholder="+593 99 999 9999" />
+    </div>
+
+    <div>
+      <label class="font-semibold block mb-2">Ubicación</label>
+      <input
+        type="text"
+        [(ngModel)]="perfil.ubicacion"
+        class="input input-bordered w-full"
+        placeholder="Cuenca - Ecuador" />
+    </div>
+
+  </div>
+
+  <!-- ============================= -->
+  <!-- FOTO DE PERFIL -->
+  <!-- ============================= -->
+  <div class="mb-8">
+    <label class="font-semibold block mb-2">URL Foto de Perfil</label>
+    <input
+      type="text"
+      [(ngModel)]="perfil.foto"
+      class="input input-bordered w-full"
+      placeholder="https://imagen.jpg" />
+  </div>
+
+  <!-- ============================= -->
+  <!-- SOBRE MÍ -->
+  <!-- ============================= -->
+  <div class="mb-8">
+    <label class="font-semibold block mb-2">Sobre mí</label>
+    <textarea
+      rows="4"
+      [(ngModel)]="perfil.descripcion"
+      class="textarea textarea-bordered w-full"
+      placeholder="Cuéntanos sobre tu experiencia profesional">
+    </textarea>
+  </div>
+
+  <!-- ============================= -->
+  <!-- GITHUB -->
+  <!-- ============================= -->
+  <div class="mb-8">
+    <label class="font-semibold block mb-2">GitHub</label>
+    <input
+      type="url"
+      [(ngModel)]="perfil.github"
+      class="input input-bordered w-full"
+      placeholder="https://github.com/usuario" />
+  </div>
+
+  <!-- ============================= -->
+  <!-- HABILIDADES -->
+  <!-- ============================= -->
+  <div class="mb-8">
+    <label class="font-semibold block mb-4 text-lg">
+      Habilidades
+    </label>
+
+    <div class="flex gap-3 mb-4">
+      <input
+        type="text"
+        [(ngModel)]="nuevaSkill"
+        class="input input-bordered w-full"
+        placeholder="Ej: Angular" />
+
+      <button
+        type="button"
+        class="btn btn-outline btn-primary"
+        (click)="agregarSkill()">
+        +
+      </button>
+    </div>
+
+    <div class="flex flex-wrap gap-2">
+      <span
+        *ngFor="let skill of perfil.skills"
+        class="badge badge-outline border-cyan-900 text-cyan-900 px-4 py-2">
+        {{ skill }}
+      </span>
+
+      <span
+        *ngIf="perfil.skills.length === 0"
+        class="text-sm text-gray-400">
+        No hay habilidades agregadas
+      </span>
+    </div>
+  </div>
+
+  <!-- ============================= -->
+  <!-- BOTONES -->
+  <!-- ============================= -->
+  <div class="flex justify-end gap-4">
+
+    <button
+      type="button"
+      class="btn btn-outline"
+      routerLink="/programmer/perfil">
+      Cancelar
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="guardarCambios()">
+      Guardar Cambios
+    </button>
+
+  </div>
+
+</div>

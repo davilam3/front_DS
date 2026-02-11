@@ -1,0 +1,48 @@
+<div class="card bg-white shadow-lg hover:shadow-2xl hover:-translate-y-2
+            duration-300 w-80 rounded-2xl border border-gray-200">
+
+    <figure class="p-4">
+        <img [src]="programador.imagen" class="h-56 w-full object-cover rounded-xl shadow-md" />
+    </figure>
+
+    <div class="card-body text-center">
+
+        <h2 class="text-2xl font-bold text-cyan-900">
+            {{ programador.nombre }}
+        </h2>
+
+        <p class="font-medium text-gray-700">
+            {{ programador.especialidad }}
+        </p>
+
+        <p class="text-gray-500 text-sm mt-2">
+            {{ programador.descripcion }}
+        </p>
+
+        <div class="w-40 h-1 bg-cyan-900 mx-auto my-4 rounded-full"></div>
+
+        <!-- SKILLS -->
+        <div class="flex flex-wrap justify-center gap-2">
+            <span *ngFor="let s of programador.skills" class="badge badge-outline border-cyan-900">
+                {{ s }}
+            </span>
+        </div>
+
+        <!-- BOTONES -->
+        <div class="mt-6 flex flex-col gap-2">
+            <a [routerLink]="['/perfil', programador.id]" class="btn btn-primary w-full">
+                Ver Perfil
+            </a>
+
+            <button class="btn btn-outline btn-sm" (click)="editarCard()">
+                Editar
+            </button>
+
+
+            <button (click)="eliminarCard()" class="btn btn-error btn-sm">
+                Eliminar
+            </button>
+        </div>
+
+    </div>
+</div>

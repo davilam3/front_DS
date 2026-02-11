@@ -1,0 +1,50 @@
+<h1 class="text-3xl font-bold mb-6 text-cyan-900">
+  Gestión de Usuarios
+</h1>
+
+<!-- FILTRO -->
+<div class="flex gap-4 mb-6">
+  <button
+    (click)="cambiarFiltro('USERS')"
+    [class.btn-primary]="filtro === 'USERS'"
+    class="btn btn-outline">
+    Usuarios
+  </button>
+
+  <button
+    (click)="cambiarFiltro('PROGRAMMERS')"
+    [class.btn-primary]="filtro === 'PROGRAMMERS'"
+    class="btn btn-outline">
+    Programadores
+  </button>
+</div>
+
+<!-- LISTA -->
+<div class="card bg-white shadow rounded-xl p-6">
+
+  <table class="table w-full">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Rol</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- DATOS MOCK POR AHORA -->
+      <tr>
+        <td>Diana Ávila</td>
+        <td>diana@mail.com</td>
+        <td>
+          <span class="badge badge-info">USER</span>
+        </td>
+        <td>
+          <span class="badge badge-success">Activo</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

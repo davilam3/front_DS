@@ -2,12 +2,13 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
+import { Footer } from "../../componentes/footer/footer";
 
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, Footer],
   templateUrl: './homePage.html',
   styleUrl: './homePage.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -30,23 +30,31 @@ export class RegisterPage {
     }
 
     this.loading = true;
+    this.errorMessage = '';
+    this.successMessage = '';
 
     this.authService.register(this.name, this.email, this.password)
       .subscribe({
         next: () => {
-
-          // 🔥 LOGIN AUTOMÁTICO
-          this.authService.login(this.email, this.password)
-            .subscribe(() => {
-              this.router.navigate(['/']);
-            });
-
-        },
-        error: () => {
-          this.errorMessage = 'Error al registrar usuario';
           this.loading = false;
+          this.successMessage = 'Usuario registrado correctamente';
+
+          // ⏳ Pequeña pausa visual y redirección
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 1500);
+        },
+        error: (err) => {
+          this.loading = false;
+
+          if (err.status === 409) {
+            this.errorMessage = 'El correo ya está registrado';
+          } else {
+            this.errorMessage = 'Error al registrar usuario';
+          }
         }
       });
   }
+
 
 }
