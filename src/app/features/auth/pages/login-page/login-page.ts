@@ -34,15 +34,16 @@ export class LoginPage {
       next: () => {
         this.loading = false;
 
-        const role = this.authService.getUserRole();
+        const roles = this.authService.getUserRole();
 
-        if (role === 'ROLE_ADMIN') {
+        if (roles.includes('ROLE_ADMIN')) {
           this.router.navigate(['/admin']);
-        } else if (role === 'ROLE_PROGRAMMER') {
+        } else if (roles.includes('ROLE_PROGRAMMER')) {
           this.router.navigate(['/programmer']);
         } else {
           this.router.navigate(['/']);
         }
+
       },
 
       error: () => {

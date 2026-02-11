@@ -19,13 +19,13 @@ export class Navbar {
     return this.authService.isAuthenticated();
   }
 
-  esAdmin(): boolean {
-    return this.authService.getUserRole() === 'ROLE_ADMIN';
-  }
+ esAdmin(): boolean {
+  return this.authService.getUserRole().includes('ROLE_ADMIN');
+}
 
-  esProgramador(): boolean {
-    return this.authService.getUserRole() === 'ROLE_PROGRAMMER';
-  }
+esProgramador(): boolean {
+  return this.authService.getUserRole().includes('ROLE_PROGRAMMER');
+}
 
   logout(): void {
     this.authService.logout();
@@ -49,22 +49,19 @@ export class Navbar {
     }
   }
 
-  // 🎭 ROL LIMPIO PARA EL SWITCH DEL HTML
-  userRole(): string {
-    const role = this.authService.getUserRole();
+ userRole(): string {
+  const roles = this.authService.getUserRole();
 
-    if (role === 'ROLE_ADMIN') return 'admin';
-    if (role === 'ROLE_PROGRAMMER') return 'programador';
-    return 'user';
-  }
+  if (roles.includes('ROLE_ADMIN')) return 'admin';
+  if (roles.includes('ROLE_PROGRAMMER')) return 'programador';
+  return 'user';
+}
 
-  // 🏠 NAVEGACIÓN HOME
   goHome(event: Event): void {
     event.preventDefault();
     this.router.navigate(['/']);
   }
 
-  // 🔽 SCROLL A SECCIONES
   scrollToPerfiles(event: Event): void {
     event.preventDefault();
     document.getElementById('perfiles')?.scrollIntoView({ behavior: 'smooth' });

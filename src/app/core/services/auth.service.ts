@@ -8,6 +8,20 @@ import { tap } from 'rxjs';
 })
 export class AuthService {
 
+  private http = inject(HttpClient);
+  private apiUrl = environment.apiUrl + '/api/auth';
+
+  login(email: string, password: string) {
+    return this.http.post<any>(`${this.apiUrl}/login`, { email, password })
+      .pipe(
+        tap(response => {
+          if (response?.token) {
+            localStorage.setItem('token', response.token);
+          }
+        })
+      );
+  }
+
 
   register(name: string, email: string, password: string) {
     return this.http.post<any>(`${this.apiUrl}/register`, {
@@ -16,17 +30,7 @@ export class AuthService {
       password
     });
   }
-  private http = inject(HttpClient);
-  private apiUrl = 'https://dc-plataform.onrender.com/api';
 
-  login(email: string, password: string) {
-    return this.http.post<any>(`${this.apiUrl}/login`, { email, password })
-      .pipe(
-        tap(response => {
-          localStorage.setItem('token', response.token);
-        })
-      );
-  }
 
   logout() {
     localStorage.removeItem('token');
@@ -40,28 +44,38 @@ export class AuthService {
     return !!this.getToken();
   }
 
-  getUserRole(): string | null {
-    const token = this.getToken();
-    if (!token) return null;
-
-    const payload = JSON.parse(atob(token.split('.')[1]));
-
-    // roles viene como string: "ROLE_ADMIN,ROLE_USER"
-    if (payload.roles) {
-      return payload.roles.split(',')[0];
-    }
-
-    return null;
-  }
-
-
   getCurrentUser(): any | null {
     const token = this.getToken();
     if (!token) return null;
 
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    return payload;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload;
+    } catch {
+      return null;
+    }
   }
 
+  getUserRole(): string[] {
+    const user = this.getCurrentUser();
+    if (!user) return [];
+
+    // Caso 1: roles como array
+    if (Array.isArray(user.roles)) {
+      return user.roles;
+    }
+
+    // Caso 2: authorities como array (Spring Security estándar)
+    if (Array.isArray(user.authorities)) {
+      return user.authorities;
+    }
+
+    // Caso 3: roles como string
+    if (typeof user.roles === 'string') {
+      return user.roles.split(',');
+    }
+
+    return [];
+  }
 
 }
